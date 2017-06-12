@@ -1,9 +1,9 @@
-package cs3500.music.model.note;
+package cs3500.music.model.pitch;
 
 /**
  * Enum to represent all 12 possible musical pitches.
  */
-public enum Pitch {
+public enum Pitch implements IPitch {
   C(0),
   CSHARP(1),
   D(2),

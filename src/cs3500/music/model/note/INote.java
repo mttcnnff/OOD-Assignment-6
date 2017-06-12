@@ -1,7 +1,22 @@
 package cs3500.music.model.note;
 
-/**
- * Created by Matt on 6/12/17.
- */
+
 public interface INote {
+
+  String toString();
+
+  Integer getDuration();
+
+  void editDuration(Integer newDur);
+
+  Note getTone();
+
+  Note nextHighestTone();
+
+  String getInstrument();
+
+  Integer compareDuration(INote that);
+
+  Integer getRank();
+
 }

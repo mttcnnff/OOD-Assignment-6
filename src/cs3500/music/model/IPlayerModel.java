@@ -1,9 +1,10 @@
 package cs3500.music.model;
 
 import java.util.List;
+import java.util.Map;
 
-import cs3500.music.model.song.Song;
-import cs3500.music.model.note.Note;
+import cs3500.music.model.note.INote;
+import cs3500.music.model.song.ISong;
 
 public interface IPlayerModel {
   /**
@@ -22,7 +23,7 @@ public interface IPlayerModel {
    * @param beat beat at which you want to add this note.
    * @param note note that you would like to add.
    */
-  void addNote(Integer beat, Note note);
+  void addNote(Integer beat, INote note);
 
   /**
    * Removes specified note at the specified beat.
@@ -34,7 +35,7 @@ public interface IPlayerModel {
    * @param beat beat at which you want to add this note.
    * @param note note that you would like to remove.
    */
-  void removeNote(Integer beat, Note note);
+  void removeNote(Integer beat, INote note);
 
   /**
    * Edits specified notes duration with given duration.
@@ -45,7 +46,7 @@ public interface IPlayerModel {
    * @param note        note in this beat that you are editing.
    * @param newDuration new duration you wish to set.
    */
-  void editNoteDuration(Integer beat, Note note, Integer newDuration);
+  void editNoteDuration(Integer beat, INote note, Integer newDuration);
 
   /**
    * Combines this model's song with given song by "overlaying" it from the start.
@@ -54,20 +55,14 @@ public interface IPlayerModel {
    *
    * @param song song you wish to combine with current one in your model.
    */
-  void combine(Song song);
+  void combine(ISong song);
 
   /**
    * Concatenates this model's song with the given song by appending it to the end.
    *
    * @param song song you wish to concatenate with current one in your model.
    */
-  void concat(Song song);
+  void concat(ISong song);
 
-  /**
-   * Gets a list of notes to play based on given beat.
-   *
-   * @param beat desired beat to play/reference.
-   * @return READ-ONLY copy of given beat's notes.
-   */
-  List<Note> getBeat(Integer beat);
+  Map<Integer, List<INote>> readSong();
 }

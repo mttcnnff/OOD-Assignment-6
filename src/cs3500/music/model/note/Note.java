@@ -2,11 +2,14 @@ package cs3500.music.model.note;
 
 import java.util.Objects;
 
+import cs3500.music.model.pitch.IPitch;
+import cs3500.music.model.pitch.Pitch;
+
 /**
  * Note class used to represent a musical note being played in piece of music.
  */
-public class Note implements Comparable<Note> {
-  private Pitch pitch;
+public class Note implements Comparable<INote>, INote {
+  private IPitch pitch;
   private Integer octave;
   private String instrument;
   private Integer duration;
@@ -62,6 +65,10 @@ public class Note implements Comparable<Note> {
     return new Builder().pitch(this.pitch).octave(this.octave).build();
   }
 
+  public Integer getRank() {
+    return this.pitch.getRank() + this.octave;
+  }
+
   public Note nextHighestTone() {
     Pitch newPitch = pitch.getNextHighest();
     if (newPitch.equals(Pitch.C)) {
@@ -85,17 +92,9 @@ public class Note implements Comparable<Note> {
    * @param that other note to compare.
    * @return difference of their duration.
    */
-  public Integer compareDuration(Note that) {
-    return this.duration - that.duration;
+  public Integer compareDuration(INote that) {
+    return this.duration - that.getDuration();
   }
-
-  /**
-   * Overriden equals method, leaves out duration in operation.
-   */
-
-  /**
-   * Overriden hashCode method, leaves out duration in operation.
-   */
 
   /**
    * Overriden compareTo method to compare note's by tone.
@@ -105,10 +104,13 @@ public class Note implements Comparable<Note> {
    * @return this's tone compared to o's tone.
    */
   @Override
-  public int compareTo(Note o) {
-    return this.pitch.getRank() + this.octave - o.pitch.getRank() + o.octave;
+  public int compareTo(INote o) {
+    return this.getRank() - o.getRank();
   }
 
+  /**
+   * Overriden equals method, leaves out duration in operation.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -121,6 +123,9 @@ public class Note implements Comparable<Note> {
     return instrument != null ? instrument.equals(note.instrument) : note.instrument == null;
   }
 
+  /**
+   * Overriden hashCode method, leaves out duration in operation.
+   */
   @Override
   public int hashCode() {
     int result = pitch != null ? pitch.hashCode() : 0;
@@ -133,12 +138,12 @@ public class Note implements Comparable<Note> {
    * Builder class for Note.
    */
   public static class Builder {
-    private Pitch pitch;
+    private IPitch pitch;
     private Integer octave;
     private String instrument = "default";
     private Integer duration = 1;
 
-    public Builder pitch(Pitch pitch) {
+    public Builder pitch(IPitch pitch) {
       this.pitch = pitch;
       return this;
     }

@@ -4,7 +4,7 @@ import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.PlayerModel;
 import cs3500.music.model.song.Song;
 import cs3500.music.model.note.Note;
-import cs3500.music.model.note.Pitch;
+import cs3500.music.model.pitch.Pitch;
 
 import static org.junit.Assert.assertEquals;
 
