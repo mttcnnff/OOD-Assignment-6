@@ -1,15 +1,19 @@
-package cs3500.music.model.song;
+package cs3500.music.song;
 
 import java.util.List;
 import java.util.Map;
 
-import cs3500.music.model.note.INote;
+import cs3500.music.note.INote;
 
 public interface ISong {
 
-  String toString();
+  Map<Integer, List<INote>> getSong();
 
-  Map<Integer, List<INote>> readSong();
+  Map<INote, Integer> getToneCount();
+
+  List<INote> getBeat(Integer beat);
+
+  Integer getLength();
 
   Boolean addNote(Integer beat, INote note);
 

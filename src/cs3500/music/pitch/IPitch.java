@@ -1,4 +1,4 @@
-package cs3500.music.model.pitch;
+package cs3500.music.pitch;
 
 public interface IPitch {
 

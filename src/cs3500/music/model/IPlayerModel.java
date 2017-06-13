@@ -3,8 +3,8 @@ package cs3500.music.model;
 import java.util.List;
 import java.util.Map;
 
-import cs3500.music.model.note.INote;
-import cs3500.music.model.song.ISong;
+import cs3500.music.note.INote;
+import cs3500.music.song.ISong;
 
 public interface IPlayerModel {
   /**
@@ -64,5 +64,13 @@ public interface IPlayerModel {
    */
   void concat(ISong song);
 
-  Map<Integer, List<INote>> readSong();
+  Map<Integer, List<INote>> getSong();
+
+  Map<INote, Integer> getToneCount();
+
+  List<INote> getBeat(Integer beat);
+
+  Integer getLength();
+
+  void readInSong(String filename);
 }

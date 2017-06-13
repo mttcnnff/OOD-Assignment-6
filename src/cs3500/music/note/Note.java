@@ -1,9 +1,9 @@
-package cs3500.music.model.note;
+package cs3500.music.note;
 
 import java.util.Objects;
 
-import cs3500.music.model.pitch.IPitch;
-import cs3500.music.model.pitch.Pitch;
+import cs3500.music.pitch.IPitch;
+import cs3500.music.pitch.Pitch;
 
 /**
  * Note class used to represent a musical note being played in piece of music.
@@ -11,8 +11,9 @@ import cs3500.music.model.pitch.Pitch;
 public class Note implements Comparable<INote>, INote {
   private IPitch pitch;
   private Integer octave;
-  private String instrument;
+  private Integer instrument;
   private Integer duration;
+  private Integer volume;
 
   /**
    * Constructor used only by this class's builder
@@ -27,6 +28,7 @@ public class Note implements Comparable<INote>, INote {
     if (b.duration < 1) {
       throw new IllegalArgumentException();
     }
+    this.volume = b.volume;
     this.duration = b.duration;
     this.instrument = b.instrument;
     this.pitch = b.pitch;
@@ -65,8 +67,9 @@ public class Note implements Comparable<INote>, INote {
     return new Builder().pitch(this.pitch).octave(this.octave).build();
   }
 
-  public Integer getRank() {
-    return this.pitch.getRank() + this.octave;
+  @Override
+  public Integer toInteger() {
+    return ((this.octave + 1) * 12) + this.pitch.getRank();
   }
 
   public Note nextHighestTone() {
@@ -81,7 +84,7 @@ public class Note implements Comparable<INote>, INote {
   /**
    * @return string representation of this note's instrument.
    */
-  public String getInstrument() {
+  public Integer getInstrument() {
     return this.instrument;
   }
 
@@ -105,7 +108,7 @@ public class Note implements Comparable<INote>, INote {
    */
   @Override
   public int compareTo(INote o) {
-    return this.getRank() - o.getRank();
+    return this.toInteger() - o.toInteger();
   }
 
   /**
@@ -140,8 +143,9 @@ public class Note implements Comparable<INote>, INote {
   public static class Builder {
     private IPitch pitch;
     private Integer octave;
-    private String instrument = "default";
+    private Integer instrument;
     private Integer duration = 1;
+    private Integer volume;
 
     public Builder pitch(IPitch pitch) {
       this.pitch = pitch;
@@ -153,13 +157,18 @@ public class Note implements Comparable<INote>, INote {
       return this;
     }
 
-    public Builder instrument(String instrument) {
+    public Builder instrument(Integer instrument) {
       this.instrument = instrument;
       return this;
     }
 
     public Builder duration(Integer duration) {
       this.duration = duration;
+      return this;
+    }
+
+    public Builder volume(Integer volume) {
+      this.volume = volume;
       return this;
     }
 

@@ -1,5 +1,7 @@
-package cs3500.music.model.note;
+package cs3500.music.note;
 
+
+import cs3500.music.pitch.Pitch;
 
 public interface INote {
 
@@ -13,10 +15,9 @@ public interface INote {
 
   Note nextHighestTone();
 
-  String getInstrument();
+  Integer getInstrument();
 
   Integer compareDuration(INote that);
 
-  Integer getRank();
-
+  Integer toInteger();
 }

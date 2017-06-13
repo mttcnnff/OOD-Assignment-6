@@ -1,20 +1,24 @@
 package cs3500.music.model;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import cs3500.music.model.note.INote;
-import cs3500.music.model.song.ISong;
-import cs3500.music.model.song.Song;
-import cs3500.music.model.note.Note;
+import cs3500.music.note.INote;
+import cs3500.music.song.ISong;
+import cs3500.music.song.Song;
+import cs3500.music.util.MusicReader;
 
 public class PlayerModel implements IPlayerModel {
-  private Song song;
+  private ISong song;
 
   public PlayerModel(Integer measure) {
     this.song = new Song(measure);
   }
+
+  public PlayerModel(ISong song) { this.song = song; }
 
   @Override
   public String print() {
@@ -56,8 +60,33 @@ public class PlayerModel implements IPlayerModel {
   }
 
   @Override
-  public Map<Integer, List<INote>> readSong() {
-    return this.song.readSong();
+  public Map<Integer, List<INote>> getSong() {
+    return this.song.getSong();
   }
+
+  @Override
+  public Map<INote, Integer> getToneCount() {
+    return this.song.getToneCount();
+  }
+
+  @Override
+  public List<INote> getBeat(Integer beat) {
+    return this.song.getBeat(beat);
+  }
+
+  @Override
+  public Integer getLength() {
+    return this.song.getLength();
+  }
+
+  @Override
+  public void readInSong(String filename) {
+    try (FileReader fileReader = new FileReader(filename)){
+      this.song = MusicReader.parseFile(fileReader, new Song.Builder());
+    } catch (IOException e){
+      e.printStackTrace();
+    }
+  }
+
 
 }

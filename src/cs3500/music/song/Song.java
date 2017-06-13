@@ -1,4 +1,4 @@
-package cs3500.music.model.song;
+package cs3500.music.song;
 
 
 import java.util.ArrayList;
@@ -12,41 +12,59 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import cs3500.music.model.note.INote;
+import cs3500.music.note.INote;
+import cs3500.music.note.Note;
+import cs3500.music.pitch.Pitch;
+import cs3500.music.util.CompositionBuilder;
+import cs3500.music.util.Utils;
 
 public class Song implements ISong {
   private Map<Integer, List<INote>> song;
   private Map<INote, Integer> toneCount;
   private Integer length;
   private Integer measure;
-  private Comparator<INote> durationSort;
+  private Integer tempo;
+  public static Comparator<INote> durationSort = (o1, o2) -> {
+    int ans = o2.compareDuration(o1);
+    return ans == 0 ? 1 : ans;
+  };
 
-  /**
-   * Constructor.
-   *
-   * @param measure desired measure of song.
-   * @throws IllegalArgumentException if invalid measure is passed.
-   */
-  public Song(Integer measure) throws IllegalArgumentException {
-    if (measure < 0) {
-      throw new IllegalArgumentException("Invalid measure.");
-    }
+  public Song(Integer tempo) throws IllegalArgumentException {
     this.song = new TreeMap<>();
     this.toneCount = new HashMap<>();
-    this.measure = measure;
-    this.length = 0;
-    this.durationSort = (o1, o2) -> {
-      int ans = o2.compareDuration(o1);
-      return ans == 0 ? 1 : ans;
-    };
+    this.tempo = tempo;
+    this.updateLength();
   }
 
-  public Map<Integer, List<INote>> readSong() {
+  public Song(Builder b) throws IllegalArgumentException {
+    this.song = b.builderSong;
+    this.toneCount = b.builderToneCount;
+    this.tempo = b.builderTempo;
+    this.measure = b.builderMeasure;
+    this.updateLength();
+  }
+
+  public Map<Integer, List<INote>> getSong() {
     TreeMap<Integer, List<INote>> songContents = new TreeMap<>();
     for (Integer beat : this.song.keySet()) {
       songContents.put(beat, Collections.unmodifiableList(this.song.get(beat)));
     }
-    return songContents;
+    return Collections.unmodifiableMap(songContents);
+  }
+
+  @Override
+  public Map<INote, Integer> getToneCount() {
+    return Collections.unmodifiableMap(this.toneCount);
+  }
+
+  public List<INote> getBeat(Integer beat) {
+    return Collections.unmodifiableList(this.song.get(beat));
+  }
+
+  @Override
+  public Integer getLength() {
+    this.updateLength();
+    return this.length;
   }
 
   /**
@@ -63,17 +81,32 @@ public class Song implements ISong {
     if (beat < 0) {
       throw new IllegalArgumentException("Invalid beat number : " + beat.toString());
     }
-    this.song.putIfAbsent(beat, new ArrayList<>());
-    List<INote> beatNotes = this.song.get(beat);
-    if (!beatNotes.contains(note)) {
-      beatNotes.add(note);
-      this.toneCount.putIfAbsent(note.getTone(), 0);
-      this.toneCount.put(note.getTone(), this.toneCount.get(note.toString()) + 1);
+    if (addNoteHelper(beat, note, this.song, this.toneCount)) {
+      this.updateLength();
+      return true;
     } else {
       return false;
     }
-    beatNotes.sort(this.durationSort);
-    this.updateLength();
+  }
+
+  private static Boolean addNoteHelper(Integer beat, INote note, Map<Integer, List<INote>> song,
+                                   Map<INote,
+          Integer> toneCount) {
+    Objects.requireNonNull(note, "Note is null");
+    if (beat < 0) {
+      throw new IllegalArgumentException("Invalid beat number : " + beat.toString());
+    }
+    song.putIfAbsent(beat, new ArrayList<>());
+    List<INote> beatNotes = song.get(beat);
+
+    if (!beatNotes.contains(note)) {
+      beatNotes.add(note);
+      toneCount.putIfAbsent(note.getTone(), 0);
+      toneCount.put(note.getTone(), toneCount.get(note.getTone()) + 1);
+    } else {
+      return false;
+    }
+    beatNotes.sort(durationSort);
     return true;
   }
 
@@ -142,7 +175,7 @@ public class Song implements ISong {
    */
   public void concat(ISong newSong) {
     Integer offset = this.length;
-    Map<Integer, List<INote>> newSongContents = newSong.readSong();
+    Map<Integer, List<INote>> newSongContents = newSong.getSong();
     for (Integer beat : newSongContents.keySet()) {
       List<INote> beatNotes = newSongContents.get(beat);
       for (INote note : beatNotes) {
@@ -159,7 +192,7 @@ public class Song implements ISong {
    * @param newSong song you wish to combine with current one in your model.
    */
   public void combine(ISong newSong) {
-    Map<Integer, List<INote>> newSongContents = newSong.readSong();
+    Map<Integer, List<INote>> newSongContents = newSong.getSong();
     for (Integer beat : newSongContents.keySet()) {
       List<INote> oldNotes = this.song.get(beat);
       List<INote> beatNotes = newSongContents.get(beat);
@@ -179,91 +212,6 @@ public class Song implements ISong {
 
   }
 
-  /**
-   * Prints song contained in this model as a string according to the specs found in Assignment 5
-   *
-   * @return String representation of the song this model contains.
-   */
-  @Override
-  public String toString() {
-    TreeSet<INote> presentTones = new TreeSet<>(this.toneCount.keySet());
-    if (presentTones.isEmpty()) {
-      return "";
-    }
-    ArrayList<String> firstRow = new ArrayList<>();
-    HashMap<INote, Integer> colMap = new HashMap<>();
-    int firstColPad = this.length.toString().length();
-
-
-    INote lowestTone = presentTones.first();
-    INote highestTone = presentTones.last();
-    INote currTone = lowestTone;
-    firstRow.add(padNumber(" ", firstColPad));
-    int count = 1;
-    while (!currTone.equals(highestTone.nextHighestTone())) {
-      colMap.put(currTone, count);
-      count++;
-      firstRow.add(padNoteName(currTone));
-      currTone = currTone.nextHighestTone();
-    }
-
-    String[] fr = firstRow.toArray(new String[firstRow.size()]);
-    Integer rows = this.length + 1;
-    Integer cols = firstRow.size();
-
-
-    String[][] printMap = new String[rows][cols];
-    printMap[0] = fr;
-
-    for (Integer i = 1; i < rows; i++) {
-      printMap[i] = rowFill(i, cols, firstColPad);
-    }
-
-    for (Integer beat : this.song.keySet()) {
-      for (INote note : this.song.get(beat)) {
-        printMap[beat + 1][colMap.get(note.getTone())] = padNote("X");
-        for (int i = 1; i < note.getDuration(); i++) {
-          printMap[beat + 1 + i][colMap.get(note.getTone())] = padNote("|");
-        }
-      }
-    }
-
-    StringBuilder result = new StringBuilder();
-    for (int i = 0; i < rows; i++) {
-      for (int j = 0; j < cols; j++) {
-        if (printMap[i][j] != null) {
-          result.append(printMap[i][j]);
-        }
-      }
-      result.append("\n");
-    }
-
-    result.deleteCharAt(result.length() - 1);
-    return result.toString();
-  }
-
-  //PRIVATE METHODS:
-
-  private String[] rowFill(Integer row, Integer width, Integer padding) {
-    String[] result = new String[width];
-    Arrays.fill(result, "     ");
-    String num = padNumber(String.valueOf(row - 1), padding);
-    result[0] = num;
-    return result;
-  }
-
-  private String padNumber(String num, Integer padding) {
-    return String.format("%1$" + padding + "s", num);
-  }
-
-  private String padNoteName(INote note) {
-    return String.format("%1$" + 4 + "s ", note.toString());
-  }
-
-  private String padNote(String note) {
-    return String.format("  %s  ", note);
-  }
-
   private void updateLength() {
     this.length = 0;
     for (Integer beat : this.song.keySet()) {
@@ -279,5 +227,40 @@ public class Song implements ISong {
    */
   private String printMeasure() {
     return this.measure.toString();
+  }
+
+  public static class Builder implements CompositionBuilder<ISong> {
+
+    private Map<Integer, List<INote>> builderSong = new TreeMap<>();
+    private Map<INote, Integer> builderToneCount = new HashMap<>();
+    private Integer builderTempo;
+    private Integer builderMeasure = 0;
+
+    @Override
+    public ISong build() {
+      return new Song(this);
+    }
+
+    @Override
+    public CompositionBuilder<ISong> setTempo(int tempo) {
+      this.builderTempo = tempo;
+      return this;
+    }
+
+    public CompositionBuilder<ISong> setMeasure(Integer measure) {
+      this.builderMeasure = measure;
+      return this;
+    }
+
+    @Override
+    public CompositionBuilder<ISong> addNote(int start, int end, int instrument, int pitch, int
+            volume) {
+      Integer octave = Utils.integerToOctave(pitch);
+      Pitch tone = Utils.integerToPitch(pitch);
+      Integer duration = end - start;
+      addNoteHelper(start, new Note.Builder().pitch(tone).octave(octave).instrument(instrument)
+              .duration(duration).volume(volume).build(), this.builderSong, this.builderToneCount);
+      return this;
+    }
   }
 }

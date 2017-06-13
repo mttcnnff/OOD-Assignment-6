@@ -2,9 +2,9 @@ import org.junit.Test;
 
 import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.PlayerModel;
-import cs3500.music.model.song.Song;
-import cs3500.music.model.note.Note;
-import cs3500.music.model.pitch.Pitch;
+import cs3500.music.song.Song;
+import cs3500.music.note.Note;
+import cs3500.music.pitch.Pitch;
 
 import static org.junit.Assert.assertEquals;
 
@@ -60,7 +60,7 @@ public class PlayerModelTests {
   public void TestAdd4() {
     IPlayerModel model = new PlayerModel(4);
     Note a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
-    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument("guitar").build();
+    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
     model.addNote(0, a41);
     assertEquals(false, a4.equals(a41));
@@ -102,7 +102,7 @@ public class PlayerModelTests {
   public void TestRemove4() {
     IPlayerModel model = new PlayerModel(4);
     Note a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
-    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument("guitar").build();
+    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
     model.removeNote(0, a41);
   }
@@ -130,7 +130,7 @@ public class PlayerModelTests {
   public void TestRemove7() {
     IPlayerModel model = new PlayerModel(4);
     Note a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
-    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument("guitar").build();
+    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
     model.addNote(0, a41);
     model.removeNote(0, a41);
@@ -171,7 +171,7 @@ public class PlayerModelTests {
   public void TestEditDuration4() {
     IPlayerModel model = new PlayerModel(4);
     Note a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(6).build();
-    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument("guitar").build();
+    Note a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
     model.addNote(0, a41);
     model.editNoteDuration(0, a4, 1);
@@ -337,7 +337,7 @@ public class PlayerModelTests {
     IPlayerModel model = new PlayerModel(4);
     Song song = new Song(4);
     Note c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
-    Note c41 = new Note.Builder().pitch(Pitch.C).octave(0).duration(6).instrument("guitar").build();
+    Note c41 = new Note.Builder().pitch(Pitch.C).octave(0).duration(6).instrument(1).build();
     model.addNote(0, c4);
     song.addNote(0, c41);
     model.combine(song);
