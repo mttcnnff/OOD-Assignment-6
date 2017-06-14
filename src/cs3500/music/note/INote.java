@@ -17,6 +17,8 @@ public interface INote {
 
   Integer getInstrument();
 
+  Integer getVolume();
+
   Integer compareDuration(INote that);
 
   Integer toInteger();

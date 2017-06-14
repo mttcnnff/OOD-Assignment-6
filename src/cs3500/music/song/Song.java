@@ -20,7 +20,7 @@ import cs3500.music.util.Utils;
 
 public class Song implements ISong {
   private Map<Integer, List<INote>> song;
-  private Map<INote, Integer> toneCount;
+  private TreeMap<INote, Integer> toneCount;
   private Integer length;
   private Integer measure;
   private Integer tempo;
@@ -31,7 +31,7 @@ public class Song implements ISong {
 
   public Song(Integer tempo) throws IllegalArgumentException {
     this.song = new TreeMap<>();
-    this.toneCount = new HashMap<>();
+    this.toneCount = new TreeMap<>();
     this.tempo = tempo;
     this.updateLength();
   }
@@ -57,8 +57,82 @@ public class Song implements ISong {
     return Collections.unmodifiableMap(this.toneCount);
   }
 
+  @Override
+  public TreeMap<INote, Integer> getToneRange() {
+    TreeMap<INote, Integer> toneRange = new TreeMap<>();
+
+    if (this.toneCount.isEmpty()) {
+      return toneRange;
+    }
+    else {
+      INote lowestTone = this.toneCount.firstKey();
+      INote highestTone = this.toneCount.lastKey();
+      INote currTone = lowestTone;
+      int count = 0;
+      while (!currTone.equals(highestTone.nextHighestTone())) {
+        toneRange.put(currTone, count);
+        count++;
+        currTone = currTone.nextHighestTone();
+      }
+    }
+
+    return toneRange;
+  }
+
+  @Override
+  public int[][] getPrintMap() {
+    Map<INote, Integer> colMap = this.getToneRange();
+    this.updateLength();
+    int[][] printMap = new int[this.length][colMap.size()];
+
+    for (int i = 0; i < this.length; i++) {
+      printMap[i] = new int[colMap.size()];
+      Arrays.fill(printMap[i], 0);
+    }
+
+    for (Integer beat : this.song.keySet()) {
+      for (INote note : this.song.get(beat)) {
+        printMap[beat][colMap.get(note.getTone())] = -1;
+        for (int i = 1; i < note.getDuration(); i++) {
+          printMap[beat + i][colMap.get(note.getTone())] = 1;
+        }
+      }
+    }
+
+    return printMap;
+  }
+
+  @Override
+  public Integer getTempo() {
+    return this.tempo;
+  }
+
   public List<INote> getBeat(Integer beat) {
-    return Collections.unmodifiableList(this.song.get(beat));
+    if (beat < 0) {
+      throw new IllegalArgumentException("Invalid beat number");
+    }
+    List<INote> result = this.song.get(beat);
+    if (result == null) {
+      return new ArrayList<>();
+    } else {
+      return Collections.unmodifiableList(this.song.get(beat));
+    }
+  }
+
+  @Override
+  public List<INote> getBeatState(Integer beat) {
+    Map<INote, Integer> colMap = this.getToneRange();
+    int[] contents = this.getPrintMap()[beat];
+    ArrayList<INote> beatState = new ArrayList<>();
+
+    for (INote key : colMap.keySet()) {
+      if (contents[colMap.get(key)] != 0) {
+        beatState.add(key.getTone());
+      }
+    }
+
+    return beatState;
+
   }
 
   @Override
@@ -232,7 +306,7 @@ public class Song implements ISong {
   public static class Builder implements CompositionBuilder<ISong> {
 
     private Map<Integer, List<INote>> builderSong = new TreeMap<>();
-    private Map<INote, Integer> builderToneCount = new HashMap<>();
+    private TreeMap<INote, Integer> builderToneCount = new TreeMap<>();
     private Integer builderTempo;
     private Integer builderMeasure = 0;
 

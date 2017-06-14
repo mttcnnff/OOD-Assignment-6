@@ -12,6 +12,7 @@ public class TestPanel extends JPanel {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
     BasicStroke stroke = new BasicStroke(3);
+    g2d.setStroke(stroke);
 
     g2d.drawRect(0, 0, 100, 100);
 

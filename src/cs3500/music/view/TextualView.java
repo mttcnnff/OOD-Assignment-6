@@ -19,12 +19,13 @@ public class TextualView implements IView {
 
   TextualView(IPlayerModel model) {
     this.model = model;
-    this.refresh();
+    this.refresh(0);
   }
 
   @Override
   public void makeVisible() {
     System.out.println(this.getText());
+
   }
 
   @Override
@@ -33,7 +34,7 @@ public class TextualView implements IView {
   }
 
   @Override
-  public void refresh() {
+  public void refresh(Integer beat) {
     this.song = this.model.getSong();
     this.toneCount = this.model.getToneCount();
     this.length = this.model.getLength();
@@ -44,77 +45,32 @@ public class TextualView implements IView {
    */
   private String getText() {
     StringBuilder result = new StringBuilder();
+    int[][] printMap1 = this.model.getPrintMap();
+    int firstColPad = String.valueOf(printMap1.length).length();
 
-    TreeSet<INote> presentTones = new TreeSet<>(this.toneCount.keySet());
-    if (!presentTones.isEmpty()) {
-
-      ArrayList<String> firstRow = new ArrayList<>();
-      HashMap<INote, Integer> colMap = new HashMap<>();
-      int firstColPad = this.length.toString().length();
-
-
-      INote lowestTone = presentTones.first();
-      INote highestTone = presentTones.last();
-      INote currTone = lowestTone;
-      firstRow.add(padNumber(" ", firstColPad));
-      int count = 1;
-      while (!currTone.equals(highestTone.nextHighestTone())) {
-        colMap.put(currTone, count);
-        count++;
-        firstRow.add(padNoteName(currTone));
-        currTone = currTone.nextHighestTone();
-      }
-
-      String[] fr = firstRow.toArray(new String[firstRow.size()]);
-      Integer rows = this.length + 1;
-      Integer cols = firstRow.size();
-
-
-      String[][] printMap = new String[rows][cols];
-      printMap[0] = fr;
-
-      for (Integer i = 1; i < rows; i++) {
-        printMap[i] = rowFill(i, cols, firstColPad);
-      }
-
-      for (Integer beat : this.song.keySet()) {
-        for (INote note : this.song.get(beat)) {
-          printMap[beat + 1][colMap.get(note.getTone())] = padNote("X");
-          for (int i = 1; i < note.getDuration(); i++) {
-            printMap[beat + 1 + i][colMap.get(note.getTone())] = padNote("|");
-          }
-        }
-      }
-
-      for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-          if (printMap[i][j] != null) {
-            result.append(printMap[i][j]);
-          }
-        }
-        result.append("\n");
-      }
-
-      result.deleteCharAt(result.length() - 1);
-
-    } else {
+    if (printMap1.length == 0) {
       result.append("");
+      return result.toString();
     }
 
-    return result.toString();
+    result.append(padNumber(" ", firstColPad));
+    for (INote note : this.model.getToneRange().keySet()) {
+      result.append(padNoteName(note));
+    }
+    result.append("\n");
 
+    for (Integer i = 0; i < printMap1.length; i++) {
+      result.append(padNumber(i.toString(), firstColPad));
+      for (Integer j = 0; j < printMap1[0].length; j++) {
+        result.append(padNote(printMap1[i][j]));
+      }
+
+      result.append("\n");
+    }
+    return result.toString();
   }
 
   //PRIVATE METHODS:
-
-  private String[] rowFill(Integer row, Integer width, Integer padding) {
-    String[] result = new String[width];
-    Arrays.fill(result, "     ");
-    String num = padNumber(String.valueOf(row - 1), padding);
-    result[0] = num;
-    return result;
-  }
-
   private String padNumber(String num, Integer padding) {
     return String.format("%1$" + padding + "s", num);
   }
@@ -123,8 +79,18 @@ public class TextualView implements IView {
     return String.format("%1$" + 4 + "s ", note.toString());
   }
 
-  private String padNote(String note) {
-    return String.format("  %s  ", note);
+  private String padNote(int code) {
+    switch (code) {
+      case 0:
+        return String.format("  %s  ", " ");
+      case 1:
+        return String.format("  %s  ", "|");
+      case -1:
+        return String.format("  %s  ", "X");
+      default:
+        throw new IllegalArgumentException("Bad note map!");
+
+    }
   }
 
 }

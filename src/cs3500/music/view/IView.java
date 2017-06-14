@@ -30,6 +30,6 @@ public interface IView {
   /**
    * Signal the view to draw itself
    */
-  void refresh();
+  void refresh(Integer beat);
 
 }

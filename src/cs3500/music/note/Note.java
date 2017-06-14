@@ -88,6 +88,11 @@ public class Note implements Comparable<INote>, INote {
     return this.instrument;
   }
 
+  @Override
+  public Integer getVolume() {
+    return this.volume;
+  }
+
   /**
    * Compare's this note's and the note given, duration.
    * The shorter duration note should come before the longer.

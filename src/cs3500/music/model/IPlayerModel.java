@@ -2,6 +2,7 @@ package cs3500.music.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import cs3500.music.note.INote;
 import cs3500.music.song.ISong;
@@ -68,9 +69,17 @@ public interface IPlayerModel {
 
   Map<INote, Integer> getToneCount();
 
+  TreeMap<INote, Integer> getToneRange();
+
+  int[][] getPrintMap();
+
+  List<INote> getBeatState(Integer beat);
+
   List<INote> getBeat(Integer beat);
 
   Integer getLength();
+
+  Integer getTempo();
 
   void readInSong(String filename);
 }

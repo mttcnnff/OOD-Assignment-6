@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 import cs3500.music.note.INote;
 import cs3500.music.song.ISong;
@@ -70,6 +71,21 @@ public class PlayerModel implements IPlayerModel {
   }
 
   @Override
+  public TreeMap<INote, Integer> getToneRange() {
+    return this.song.getToneRange();
+  }
+
+  @Override
+  public int[][] getPrintMap() {
+    return this.song.getPrintMap();
+  }
+
+  @Override
+  public List<INote> getBeatState(Integer beat) {
+    return this.song.getBeatState(beat);
+  }
+
+  @Override
   public List<INote> getBeat(Integer beat) {
     return this.song.getBeat(beat);
   }
@@ -77,6 +93,11 @@ public class PlayerModel implements IPlayerModel {
   @Override
   public Integer getLength() {
     return this.song.getLength();
+  }
+
+  @Override
+  public Integer getTempo() {
+    return this.song.getTempo();
   }
 
   @Override

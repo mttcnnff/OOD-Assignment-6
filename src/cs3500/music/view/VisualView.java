@@ -1,42 +1,48 @@
 package cs3500.music.view;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 import javax.swing.*;
 
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.note.INote;
 import cs3500.music.view.panels.MusicPanel;
 import cs3500.music.view.panels.PianoPanel;
 
 public class VisualView extends JFrame implements IView {
 
   private IPlayerModel model;
-  private JPanel musicPanel;
-  private JPanel pianoPanel;
-  private JScrollPane musicPanelScroller;
+  private JPanel baseMusicPanel;
+  private PianoPanel pianoPanel;
+  private MusicPanel musicPanel;
+  List<INote> currentNotes;
+  int[][] printMap;
+  TreeMap<INote, Integer> noteRange;
+  Boolean isPlaying;
 
-  VisualView(IPlayerModel model) {
+  public VisualView(IPlayerModel model) {
     this.model = model;
+    this.currentNotes = this.model.getBeatState(0);
+    this.printMap = this.model.getPrintMap();
+    this.noteRange = this.model.getToneRange();
+    this.isPlaying = false;
 
     this.setTitle("Music Player");
-    this.setSize(2000, 500);
+    this.setSize(2000, 1000);
     this.setResizable(true);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
     //music panel
-    this.musicPanel = new MusicPanel(this.model);
-    this.musicPanelScroller = new JScrollPane(musicPanel);
-    this.musicPanelScroller.setMinimumSize(new Dimension(4000, 500));
-    this.musicPanelScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    this.musicPanelScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    this.add(musicPanelScroller,BorderLayout.NORTH);
+    this.musicPanel = new MusicPanel(this.noteRange, this.printMap);
+    this.add(musicPanel, BorderLayout.NORTH);
 
     //piano panel
-    this.pianoPanel = new PianoPanel(this.model);
+    this.pianoPanel = new PianoPanel(this.currentNotes);
     this.pianoPanel.setPreferredSize(new Dimension(1040, 200));
     this.add(pianoPanel, BorderLayout.SOUTH);
-
 
     this.pack();
   }
@@ -52,9 +58,13 @@ public class VisualView extends JFrame implements IView {
   }
 
   @Override
-  public void refresh() {
+  public void refresh(Integer beat) {
+    this.currentNotes = this.model.getBeatState(beat);
+    this.printMap = this.model.getPrintMap();
+    this.noteRange = this.model.getToneRange();
+    this.musicPanel.setBeat(beat);
+    this.pianoPanel.sendUpdate(this.model.getBeatState(beat));
     this.repaint();
-
   }
 
 
