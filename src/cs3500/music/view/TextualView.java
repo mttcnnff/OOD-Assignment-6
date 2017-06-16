@@ -51,7 +51,7 @@ public class TextualView extends JFrame implements IView {
 
     int firstColPad = String.valueOf(songLength).length();
 
-    if (songLength == 0) {
+    if (songLength <= 1 && this.model.getStartNotes(0).isEmpty()) {
       result.append("");
       return result.toString();
     }

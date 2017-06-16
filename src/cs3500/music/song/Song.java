@@ -63,6 +63,7 @@ public class Song implements ISong {
     this.tempo = b.builderTempo;
     this.toneRange = new TreeMap<>();
     this.updateToneRange();
+    this.fillEmptyBeats();
   }
 
   @Override
@@ -142,6 +143,7 @@ public class Song implements ISong {
     }
     if (addNoteHelper(beat, note, this.startNotes, this.allNotes, this.toneCount)) {
       this.updateToneRange();
+      this.fillEmptyBeats();
       return true;
     } else {
       return false;
@@ -184,10 +186,13 @@ public class Song implements ISong {
     } else {
       return false;
     }
-    if (beat > allNotes.lastKey()) {
-      System.out.println("Problem!");
-    }
     return true;
+  }
+
+  private void fillEmptyBeats() {
+    for (int i = 0; i < this.startNotes.size(); i++) {
+      this.allNotes.putIfAbsent(i, new ArrayList<>());
+    }
   }
 
   @Override
@@ -226,6 +231,7 @@ public class Song implements ISong {
       this.startNotes.remove(beat);
     }
     this.updateToneRange();
+    this.fillEmptyBeats();
     return true;
   }
 

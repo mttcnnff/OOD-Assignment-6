@@ -2,69 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90831f93-dc9f-4833-8f0e-150b1ab41960" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/df-ttfaf.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lnl.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mystery-1.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mystery-2.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mystery-3.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/Controller.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cs3500/music/controller/KeyboardListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/cs3500/music/notes/INote.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/MockMidiDevice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/MockMidiReceiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/NoteTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/PitchTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/TextualViewTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/UtilsTests.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/zoot-lw.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/zoot-zl.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/note/INote.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/note/Note$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/note/Note$Builder.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/note/Note.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/TestPanel.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cs3500/music/note/INote.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/cs3500/music/view/panels/TestPanel.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/cs3500/music/note/Note.java" afterPath="$PROJECT_DIR$/src/cs3500/music/notes/Note.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/MusicEditor.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/MusicEditor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/model/IPlayerModel.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/model/IPlayerModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/model/PlayerModel.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/model/PlayerModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/pitch/IPitch.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/pitch/IPitch.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/pitch/Pitch$1.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/pitch/Pitch$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/pitch/Pitch.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/pitch/Pitch.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/song/ISong.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/song/ISong.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/song/Song$Builder.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/song/Song$Builder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/song/Song.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/song/Song.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/util/Utils.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/util/Utils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/AudibleView.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/AudibleView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/IView.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/IView.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/TextualView.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/TextualView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/ViewFactory.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/ViewFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/VisualView.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/VisualView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/MusicPanel.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/MusicPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/NoteListPanel.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/NoteListPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/NoteMapPanel.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/NoteMapPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/PianoPanel.class" afterPath="$PROJECT_DIR$/out/production/OOD-Assignment-6/cs3500/music/view/panels/PianoPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/test/OOD-Assignment-6/PlayerModelTests.class" afterPath="$PROJECT_DIR$/out/test/OOD-Assignment-6/PlayerModelTests.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/MusicEditor.java" afterPath="$PROJECT_DIR$/src/cs3500/music/MusicEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/IPlayerModel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/IPlayerModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/model/PlayerModel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/model/PlayerModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/pitch/IPitch.java" afterPath="$PROJECT_DIR$/src/cs3500/music/pitch/IPitch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/pitch/Pitch.java" afterPath="$PROJECT_DIR$/src/cs3500/music/pitch/Pitch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/song/ISong.java" afterPath="$PROJECT_DIR$/src/cs3500/music/song/ISong.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/song/Song.java" afterPath="$PROJECT_DIR$/src/cs3500/music/song/Song.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/util/Utils.java" afterPath="$PROJECT_DIR$/src/cs3500/music/util/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/AudibleView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/AudibleView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/IView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/IView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/TextualView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/TextualView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/ViewFactory.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/ViewFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/panels/MusicPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/panels/MusicPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/panels/NoteListPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/panels/NoteListPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/panels/NoteMapPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/panels/NoteMapPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cs3500/music/view/panels/PianoPanel.java" afterPath="$PROJECT_DIR$/src/cs3500/music/view/panels/PianoPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/PlayerModelTests.java" afterPath="$PROJECT_DIR$/test/PlayerModelTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/MockMidiReceiver.java" afterPath="$PROJECT_DIR$/test/MockMidiReceiver.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -107,102 +50,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MockMidiReceiver.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MockMidiReceiver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/MockMidiReceiver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+            <state relative-caret-position="193">
+              <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#168#169#0" expanded="true" />
                 <element signature="e#208#209#0" expanded="true" />
-                <element signature="e#279#280#0" expanded="true" />
-                <element signature="e#324#325#0" expanded="true" />
-                <element signature="e#394#395#0" expanded="true" />
-                <element signature="e#430#431#0" expanded="true" />
+                <element signature="e#407#408#0" expanded="true" />
+                <element signature="e#443#444#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextualViewTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/TextualViewTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="90" column="34" lean-forward="true" selection-start-line="90" selection-start-column="34" selection-end-line="90" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerModelTests.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/PlayerModelTests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="39" column="3" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="39" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/PlayerModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-173">
-              <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Song.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/song/Song.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="187" column="37" lean-forward="false" selection-start-line="187" selection-start-column="37" selection-end-line="187" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CompositionBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/util/CompositionBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MusicReader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/util/MusicReader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mary-little-lamb.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mary-little-lamb.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="34" column="18" lean-forward="true" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AudibleView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/AudibleView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="710">
-              <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -228,6 +87,7 @@
       <find>model.print()</find>
       <find>Note</find>
       <find>Song</find>
+      <find>updateToneRange</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -266,7 +126,6 @@
         <option value="$PROJECT_DIR$/src/cs3500/music/view/panels/MusicPanel.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/panels/NoteListPanel.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/VisualView.java" />
-        <option value="$PROJECT_DIR$/src/cs3500/music/view/TextualView.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/controller/Controller.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/model/song/ISong.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/model/song/Song.java" />
@@ -285,10 +144,11 @@
         <option value="$PROJECT_DIR$/src/cs3500/music/MusicEditor.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/view/panels/NoteMapPanel.java" />
         <option value="$PROJECT_DIR$/test/MockMidiDevice.java" />
-        <option value="$PROJECT_DIR$/test/MockMidiReceiver.java" />
         <option value="$PROJECT_DIR$/test/MockView.java" />
         <option value="$PROJECT_DIR$/test/MockController.java" />
         <option value="$PROJECT_DIR$/src/cs3500/music/song/Song.java" />
+        <option value="$PROJECT_DIR$/src/cs3500/music/view/TextualView.java" />
+        <option value="$PROJECT_DIR$/test/MockMidiReceiver.java" />
       </list>
     </option>
   </component>
@@ -1054,32 +914,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1497276210640</updated>
-      <workItem from="1497276213521" duration="155514000" />
+      <workItem from="1497276213521" duration="156711000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 15h 00m 49s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 15h 36m 30s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 15h 36m 49s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 15h 47m 36s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 15h 50m 42s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 16h 42m 12s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 16h 51m 22s.xml">
-      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 16h 55m 06s.xml">
       <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
     </history-entry>
@@ -1089,9 +928,30 @@
     <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 16h 59m 59s.xml">
       <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 08m 11s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 08m 25s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 13m 32s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 16m 12s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 22m 13s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 23m 50s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_OOD-Assignment-6 - 2017.06.16 at 17h 24m 04s.xml">
+      <configuration name="All in OOD-Assignment-6" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155514000" />
+    <option name="totallyTimeSpent" value="156711000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="834" extended-state="6" />
@@ -1108,13 +968,13 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39892185" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39892185" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4272237" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4272237" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884097" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1145,13 +1005,13 @@
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/cs3500/music/song/Song.java</url>
-          <line>161</line>
+          <url>file://$PROJECT_DIR$/test/PlayerModelTests.java</url>
+          <line>83</line>
           <properties />
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="70" />
+      <option name="time" value="74" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1349,14 +1209,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/TextualView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="81" column="45" lean-forward="false" selection-start-line="81" selection-start-column="45" selection-end-line="81" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs3500/music/pitch/Pitch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="58">
@@ -1519,6 +1371,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/AudibleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="710">
+          <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/util/CompositionBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/util/MusicReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-272">
+          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/TextualViewTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mary-little-lamb.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="18" lean-forward="true" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/PlayerModelTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/song/Song.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="e#3637#3638#0" expanded="false" />
+            <element signature="e#3674#3675#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/PlayerModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <element signature="e#2115#2116#0" expanded="false" />
+            <element signature="e#2384#2385#0" expanded="false" />
+            <element signature="e#2422#2423#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/TextualView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/MockMidiDevice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -1545,83 +1478,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/MockMidiReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        <state relative-caret-position="193">
+          <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#168#169#0" expanded="true" />
             <element signature="e#208#209#0" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#394#395#0" expanded="true" />
-            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#443#444#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/view/AudibleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/util/CompositionBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/util/MusicReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mary-little-lamb.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="34" column="18" lean-forward="true" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/PlayerModelTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="39" column="3" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="39" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/model/PlayerModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-173">
-          <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/TextualViewTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="90" column="34" lean-forward="true" selection-start-line="90" selection-start-column="34" selection-end-line="90" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs3500/music/song/Song.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="187" column="37" lean-forward="false" selection-start-line="187" selection-start-column="37" selection-end-line="187" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
