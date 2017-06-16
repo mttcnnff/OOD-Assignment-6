@@ -7,23 +7,29 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import cs3500.music.note.INote;
+import cs3500.music.notes.INote;
 import cs3500.music.song.ISong;
 import cs3500.music.song.Song;
 import cs3500.music.util.MusicReader;
 
+/**
+ * Class to represent PlayerModel.
+ * Allows basic functionality for song manipulation such as adding notes, removing notes, editing
+ * notes, combining songs, concatenating songs.
+ * Allows for functionality to get information about the song (what is playing at a beat, the
+ * tempo, the length, etc).
+ * Allows for reading of song in from a file.
+ */
 public class PlayerModel implements IPlayerModel {
+
   private ISong song;
 
+  /**
+   * Constructor for song.
+   * @param measure desired measure.
+   */
   public PlayerModel(Integer measure) {
     this.song = new Song(measure);
-  }
-
-  public PlayerModel(ISong song) { this.song = song; }
-
-  @Override
-  public String print() {
-    return this.song.toString();
   }
 
   @Override
@@ -66,29 +72,20 @@ public class PlayerModel implements IPlayerModel {
   }
 
   @Override
-  public Map<INote, Integer> getToneCount() {
-    return this.song.getToneCount();
-  }
-
-  @Override
-  public TreeMap<INote, Integer> getToneRange() {
+  public TreeMap<Integer, Integer> getToneRange() {
     return this.song.getToneRange();
   }
 
   @Override
-  public int[][] getPrintMap() {
-    return this.song.getPrintMap();
+  public List<INote> getStartNotes(Integer beat) {
+    return this.song.getStartNotes(beat);
   }
 
   @Override
-  public List<INote> getBeatState(Integer beat) {
-    return this.song.getBeatState(beat);
+  public List<INote> getPlayingNotes(Integer beat) {
+    return this.song.getPlayingNotes(beat);
   }
 
-  @Override
-  public List<INote> getBeat(Integer beat) {
-    return this.song.getBeat(beat);
-  }
 
   @Override
   public Integer getLength() {

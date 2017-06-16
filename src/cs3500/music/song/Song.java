@@ -1,105 +1,92 @@
 package cs3500.music.song;
 
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
-import cs3500.music.note.INote;
-import cs3500.music.note.Note;
+import cs3500.music.notes.INote;
+import cs3500.music.notes.Note;
 import cs3500.music.pitch.Pitch;
 import cs3500.music.util.CompositionBuilder;
 import cs3500.music.util.Utils;
 
+/**
+ * Class representation of a song.
+ */
 public class Song implements ISong {
-  private Map<Integer, List<INote>> song;
-  private TreeMap<INote, Integer> toneCount;
-  private Integer length;
-  private Integer measure;
-  private Integer tempo;
-  public static Comparator<INote> durationSort = (o1, o2) -> {
-    int ans = o2.compareDuration(o1);
-    return ans == 0 ? 1 : ans;
-  };
 
+  //Map: ordered by beat number
+  //List: ordered by duration; shortest -> longest
+  private TreeMap<Integer, List<INote>> startNotes;
+
+  //Map: ordered by beat number
+  //List: no order (single duration notes only)
+  private TreeMap<Integer, List<INote>> allNotes;
+
+  //ordered lowest -> highest
+  private TreeMap<Integer, Integer> toneCount;
+
+  //ordered lowest -> highest
+  private TreeMap<Integer, Integer> toneRange;
+
+  private Integer tempo;
+
+  /**
+   * Constructor for new song.
+   * @param tempo given tempo of new song.
+   * @throws IllegalArgumentException if tempo is < 0.
+   */
   public Song(Integer tempo) throws IllegalArgumentException {
-    this.song = new TreeMap<>();
+    if (tempo < 0) {
+      throw new IllegalArgumentException("Tempo is less than zero!");
+    }
+    this.startNotes = new TreeMap<>();
+    this.allNotes = new TreeMap<>();
     this.toneCount = new TreeMap<>();
+    this.toneRange = new TreeMap<>();
     this.tempo = tempo;
-    this.updateLength();
   }
 
-  public Song(Builder b) throws IllegalArgumentException {
-    this.song = b.builderSong;
+  /**
+   * Builder constructor for this class.
+   * @param b Builder used to construct this song.
+   * @throws IllegalArgumentException if builder is null.
+   */
+  Song(Builder b) throws IllegalArgumentException {
+    Objects.requireNonNull(b, "Builder is null!");
+    this.startNotes = b.builderStartNotes;
+    this.allNotes = b.builderAllNotes;
     this.toneCount = b.builderToneCount;
     this.tempo = b.builderTempo;
-    this.measure = b.builderMeasure;
-    this.updateLength();
-  }
-
-  public Map<Integer, List<INote>> getSong() {
-    TreeMap<Integer, List<INote>> songContents = new TreeMap<>();
-    for (Integer beat : this.song.keySet()) {
-      songContents.put(beat, Collections.unmodifiableList(this.song.get(beat)));
-    }
-    return Collections.unmodifiableMap(songContents);
+    this.toneRange = new TreeMap<>();
+    this.updateToneRange();
   }
 
   @Override
-  public Map<INote, Integer> getToneCount() {
-    return Collections.unmodifiableMap(this.toneCount);
+  public TreeMap<Integer, Integer> getToneRange() {
+    TreeMap<Integer, Integer> copy = new TreeMap<>(this.toneRange);
+    return copy;
   }
 
-  @Override
-  public TreeMap<INote, Integer> getToneRange() {
-    TreeMap<INote, Integer> toneRange = new TreeMap<>();
-
-    if (this.toneCount.isEmpty()) {
-      return toneRange;
-    }
-    else {
-      INote lowestTone = this.toneCount.firstKey();
-      INote highestTone = this.toneCount.lastKey();
-      INote currTone = lowestTone;
+  /**
+   * Updates this song's tone range when called.
+   */
+  private void updateToneRange() {
+    this.toneRange.clear();
+    if (!this.toneCount.isEmpty()) {
+      Integer lowestTone = this.toneCount.firstKey();
+      Integer highestTone = this.toneCount.lastKey();
+      Integer currTone = lowestTone;
       int count = 0;
-      while (!currTone.equals(highestTone.nextHighestTone())) {
-        toneRange.put(currTone, count);
+      while (!currTone.equals(highestTone + 1)) {
+        this.toneRange.put(currTone, count);
         count++;
-        currTone = currTone.nextHighestTone();
+        currTone++;
       }
     }
-
-    return toneRange;
-  }
-
-  @Override
-  public int[][] getPrintMap() {
-    Map<INote, Integer> colMap = this.getToneRange();
-    this.updateLength();
-    int[][] printMap = new int[this.length][colMap.size()];
-
-    for (int i = 0; i < this.length; i++) {
-      printMap[i] = new int[colMap.size()];
-      Arrays.fill(printMap[i], 0);
-    }
-
-    for (Integer beat : this.song.keySet()) {
-      for (INote note : this.song.get(beat)) {
-        printMap[beat][colMap.get(note.getTone())] = -1;
-        for (int i = 1; i < note.getDuration(); i++) {
-          printMap[beat + i][colMap.get(note.getTone())] = 1;
-        }
-      }
-    }
-
-    return printMap;
   }
 
   @Override
@@ -107,148 +94,164 @@ public class Song implements ISong {
     return this.tempo;
   }
 
-  public List<INote> getBeat(Integer beat) {
+  @Override
+  public Map<Integer, List<INote>> getSong() {
+    Map<Integer, List<INote>> songContents = new TreeMap<>();
+    for (Integer beat : this.startNotes.keySet()) {
+      songContents.put(beat, Collections.unmodifiableList(this.startNotes.get(beat)));
+    }
+    return Collections.unmodifiableMap(songContents);
+  }
+
+  @Override
+  public List<INote> getStartNotes(Integer beat) {
     if (beat < 0) {
       throw new IllegalArgumentException("Invalid beat number");
     }
-    List<INote> result = this.song.get(beat);
+    List<INote> result = this.startNotes.get(beat);
     if (result == null) {
       return new ArrayList<>();
     } else {
-      return Collections.unmodifiableList(this.song.get(beat));
+      return Collections.unmodifiableList(result);
     }
   }
 
   @Override
-  public List<INote> getBeatState(Integer beat) {
-    Map<INote, Integer> colMap = this.getToneRange();
-    int[] contents = this.getPrintMap()[beat];
-    ArrayList<INote> beatState = new ArrayList<>();
-
-    for (INote key : colMap.keySet()) {
-      if (contents[colMap.get(key)] != 0) {
-        beatState.add(key.getTone());
-      }
+  public List<INote> getPlayingNotes(Integer beat) {
+    if (beat < 0) {
+      throw new IllegalArgumentException("Invalid beat number");
     }
-
-    return beatState;
-
+    List<INote> result = this.allNotes.get(beat);
+    if (result == null) {
+      return new ArrayList<>();
+    } else {
+      return Collections.unmodifiableList(result);
+    }
   }
 
   @Override
   public Integer getLength() {
-    this.updateLength();
-    return this.length;
+    return this.allNotes.size();
   }
 
-  /**
-   * Adds specified note at specified beat.
-   * You cannot add duplicate notes!
-   * A duplicate note is defined as a note with the same tone, octave, and instrument.
-   * If you try to add an already existing note, an exception with be thrown.
-   *
-   * @param beat beat at which you want to add this note.
-   * @param note note that you would like to add.
-   */
+  @Override
   public Boolean addNote(Integer beat, INote note) {
     Objects.requireNonNull(note, "Note is null");
     if (beat < 0) {
       throw new IllegalArgumentException("Invalid beat number : " + beat.toString());
     }
-    if (addNoteHelper(beat, note, this.song, this.toneCount)) {
-      this.updateLength();
+    if (addNoteHelper(beat, note, this.startNotes, this.allNotes, this.toneCount)) {
+      this.updateToneRange();
       return true;
     } else {
       return false;
     }
   }
 
-  private static Boolean addNoteHelper(Integer beat, INote note, Map<Integer, List<INote>> song,
-                                   Map<INote,
-          Integer> toneCount) {
+  /**
+   * Helper for adding notes to allow builder to use the same logic to addNotes.
+   * @param beat desired beat to add note at.
+   * @param note note to add.
+   * @param startNotes map of start notes to edit.
+   * @param allNotes map of all notes to edit.
+   * @param toneCount tone count map to edit.
+   * @return true if add was successfully executed, false if not.
+   */
+  private static Boolean addNoteHelper(Integer beat, INote note, TreeMap<Integer, List<INote>>
+          startNotes, TreeMap<Integer, List<INote>> allNotes, Map<Integer, Integer> toneCount) {
     Objects.requireNonNull(note, "Note is null");
     if (beat < 0) {
       throw new IllegalArgumentException("Invalid beat number : " + beat.toString());
     }
-    song.putIfAbsent(beat, new ArrayList<>());
-    List<INote> beatNotes = song.get(beat);
+    startNotes.putIfAbsent(beat, new ArrayList<>());
+    allNotes.putIfAbsent(beat, new ArrayList<>());
+    List<INote> beatStartNotes = startNotes.get(beat);
 
-    if (!beatNotes.contains(note)) {
-      beatNotes.add(note);
-      toneCount.putIfAbsent(note.getTone(), 0);
-      toneCount.put(note.getTone(), toneCount.get(note.getTone()) + 1);
+    //if note with from same instrument at same tone doesn't exist at this beat
+    if (!beatStartNotes.contains(note)) {
+      //add to startNotes at this beat
+      beatStartNotes.add(note);
+
+      //add to allNotes at this beat through the duration
+      for (int i = beat; i < beat + note.getDuration(); i++) {
+        allNotes.putIfAbsent(i, new ArrayList<>());
+        allNotes.get(i).add(note);
+      }
+
+      //increment tone count
+      toneCount.putIfAbsent(note.toInteger(), 0);
+      toneCount.put(note.toInteger(), toneCount.get(note.toInteger()) + 1);
     } else {
       return false;
     }
-    beatNotes.sort(durationSort);
+    if (beat > allNotes.lastKey()) {
+      System.out.println("Problem!");
+    }
     return true;
   }
 
-  /**
-   * Removes specified note at the specified beat.
-   * You cannot remove notes that do not exist at this beat!
-   * You must address the note you want to remove by the correct tone, octave, and instrument.
-   * If you try and remove a note which does not exist at this beat OR remove anything from a
-   * beat which contains no notes an exception will be thrown.
-   *
-   * @param beat beat at which you want to add this note.
-   * @param note note that you would like to remove.
-   */
+  @Override
   public Boolean removeNote(Integer beat, INote note) {
     Objects.requireNonNull(note, "Notes are null");
     if (beat < 0) {
       throw new IllegalArgumentException("Invalid beat number.");
     }
-    List<INote> beatNotes = this.song.get(beat);
-    if (beatNotes != null && beatNotes.contains(note)) {
-      beatNotes.remove(note);
-      this.toneCount.put(note.getTone(), this.toneCount.get(note.getTone()) - 1);
-      if (this.toneCount.get(note.getTone()) == 0) {
-        this.toneCount.remove(note.getTone());
+    List<INote> beatStartNotes = this.startNotes.get(beat);
+
+    //if note is contained at specified beat
+    if (beatStartNotes != null && beatStartNotes.contains(note)) {
+      //remove note from start notes
+      beatStartNotes.remove(note);
+
+      //remove note from allNotes from this beat through the duration
+      for (int i = beat; i < beat + note.getDuration(); i++) {
+        //TODO:might be a mistake here
+        if (this.allNotes.get(i) != null) {
+          this.allNotes.get(i).remove(note);
+          if (this.allNotes.get(i).isEmpty()) {
+            this.allNotes.remove(i);
+          }
+        }
+      }
+
+      //update tone count
+      this.toneCount.put(note.toInteger(), this.toneCount.get(note.toInteger()) - 1);
+      if (this.toneCount.get(note.toInteger()) == 0) {
+        this.toneCount.remove(note.toInteger());
       }
     } else {
       return false;
     }
-    beatNotes.sort(this.durationSort);
-    if (beatNotes.isEmpty()) {
-      this.song.remove(beat);
+    if (beatStartNotes.isEmpty()) {
+      this.startNotes.remove(beat);
     }
-    this.updateLength();
+    this.updateToneRange();
     return true;
   }
 
-  /**
-   * Edits specified notes duration with given duration.
-   * You must address the note you want to edit by the correct tone, octave, and instrument.
-   * Duration must be > 0.
-   *
-   * @param beat        beat at which you are editing.
-   * @param note        note in this beat that you are editing.
-   * @param newDuration new duration you wish to set.
-   */
+  @Override
   public Boolean editNoteDuration(Integer beat, INote note, Integer newDuration) {
-    List<INote> beatNotes = this.song.get(beat);
+    List<INote> beatNotes = this.startNotes.get(beat);
+
     if (beatNotes == null || newDuration < 1) {
       return false;
     }
-    Integer index = beatNotes.indexOf(note);
-    if (index != -1) {
-      beatNotes.get(index).editDuration(newDuration);
+
+    Integer indexOfOldNote = beatNotes.indexOf(note);
+    if (indexOfOldNote > -1) {
+      INote oldNote = beatNotes.get(indexOfOldNote);
+      this.removeNote(beat, note);
+      oldNote.editDuration(newDuration);
+      this.addNote(beat, oldNote);
     } else {
       return false;
     }
-    beatNotes.sort(this.durationSort);
-    this.updateLength();
     return true;
   }
 
-  /**
-   * Concatenates this model's song with the given song by appending it to the end.
-   *
-   * @param newSong song you wish to concatenate with current one in your model.
-   */
+  @Override
   public void concat(ISong newSong) {
-    Integer offset = this.length;
+    Integer offset = this.getLength();
     Map<Integer, List<INote>> newSongContents = newSong.getSong();
     for (Integer beat : newSongContents.keySet()) {
       List<INote> beatNotes = newSongContents.get(beat);
@@ -258,18 +261,14 @@ public class Song implements ISong {
     }
   }
 
-  /**
-   * Combines this model's song with given song by "overlaying" it from the start.
-   * Notes of the same beat, tone, octave, and instrument will be combined according to which one
-   * is longer.
-   *
-   * @param newSong song you wish to combine with current one in your model.
-   */
+  @Override
   public void combine(ISong newSong) {
     Map<Integer, List<INote>> newSongContents = newSong.getSong();
     for (Integer beat : newSongContents.keySet()) {
-      List<INote> oldNotes = this.song.get(beat);
+
+      List<INote> oldNotes = this.startNotes.get(beat);
       List<INote> beatNotes = newSongContents.get(beat);
+
       for (INote note : beatNotes) {
         Integer index = oldNotes.indexOf(note);
         if (index == -1) {
@@ -283,32 +282,17 @@ public class Song implements ISong {
       }
     }
 
-
-  }
-
-  private void updateLength() {
-    this.length = 0;
-    for (Integer beat : this.song.keySet()) {
-      Integer beatDuration = this.song.get(beat).get(0).getDuration();
-      if (beat + beatDuration > this.length) {
-        this.length = beat + beatDuration;
-      }
-    }
   }
 
   /**
-   * Placeholder method for measure for now.
+   * Builder for Song.
    */
-  private String printMeasure() {
-    return this.measure.toString();
-  }
-
   public static class Builder implements CompositionBuilder<ISong> {
 
-    private Map<Integer, List<INote>> builderSong = new TreeMap<>();
-    private TreeMap<INote, Integer> builderToneCount = new TreeMap<>();
+    private TreeMap<Integer, List<INote>> builderStartNotes = new TreeMap<>();
+    private TreeMap<Integer, List<INote>> builderAllNotes = new TreeMap<>();
+    private TreeMap<Integer, Integer> builderToneCount = new TreeMap<>();
     private Integer builderTempo;
-    private Integer builderMeasure = 0;
 
     @Override
     public ISong build() {
@@ -321,19 +305,16 @@ public class Song implements ISong {
       return this;
     }
 
-    public CompositionBuilder<ISong> setMeasure(Integer measure) {
-      this.builderMeasure = measure;
-      return this;
-    }
-
     @Override
     public CompositionBuilder<ISong> addNote(int start, int end, int instrument, int pitch, int
             volume) {
       Integer octave = Utils.integerToOctave(pitch);
       Pitch tone = Utils.integerToPitch(pitch);
       Integer duration = end - start;
-      addNoteHelper(start, new Note.Builder().pitch(tone).octave(octave).instrument(instrument)
-              .duration(duration).volume(volume).build(), this.builderSong, this.builderToneCount);
+      addNoteHelper(start, new Note.Builder().pitch(tone).octave(octave).instrument(instrument-1)
+              .duration(duration).volume(volume).build(), this.builderStartNotes,
+              this.builderAllNotes,
+              this.builderToneCount);
       return this;
     }
   }

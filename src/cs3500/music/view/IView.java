@@ -1,34 +1,27 @@
 package cs3500.music.view;
 
-import java.util.function.Consumer;
-
-import cs3500.music.model.IPlayerModel;
+import java.awt.event.KeyListener;
 
 public interface IView {
   /**
    * Make the view visible. This is usually called
-   * after the view is constructed
+   * after the view is constructed. See classes that implement this interface for specifics.
    */
   void makeVisible();
 
-//  /**
-//   * Provide the view with a callback option to
-//   * process a command.
-//   * @param callback object
-//   */
-//  void setCommandCallback(Consumer<String> callback);
-
-
-
   /**
-   * Transmit an error message to the view, in case
-   * the command could not be processed correctly
-   * @param error
+   * this is to force the view to have a method to set up the keyboard.
+   * The name has been chosen deliberately. This is the same method signature to
+   * add a key listener in Java Swing.
+   *
+   * Thus our Swing-based implementation of this interface will already have such a
+   * method.
+   * @param listener given listener.
    */
-  void showErrorMessage(String error);
+  void addKeyListener(KeyListener listener);
 
   /**
-   * Signal the view to draw itself
+   * Signal the view to refresh itself.
    */
   void refresh(Integer beat);
 

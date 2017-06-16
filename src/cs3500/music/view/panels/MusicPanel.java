@@ -1,42 +1,57 @@
 package cs3500.music.view.panels;
 
 import java.awt.*;
-import java.util.TreeMap;
+import java.util.Objects;
 
 import javax.swing.*;
 
 import cs3500.music.model.IPlayerModel;
-import cs3500.music.note.INote;
 
+/**
+ * Class for music panel of view.
+ * This will show a piece of music and the live piano rendering of what is being played.
+ */
 public class MusicPanel extends JPanel {
 
-  private IPlayerModel model;
-  private TreeMap<INote, Integer> noteRange;
-  NoteMapPanel noteMapPanel;
-  int[][] printMap;
-  Integer currBeat;
+  private NoteMapPanel noteMapPanel;
+  private NoteListPanel noteListPanel;
+  private Integer currBeat;
 
-
-  public MusicPanel(TreeMap<INote, Integer> noteRange, int[][] printMap) {
+  /**
+   * Constructor for MusicPanel.
+   * @param model given model this panel will represent.
+   */
+  public MusicPanel(IPlayerModel model) {
+    Objects.requireNonNull(model, "Null model passed in");
     this.setBackground(Color.DARK_GRAY);
     this.setLayout(new BorderLayout());
-    this.noteRange = noteRange;
-    this.printMap = printMap;
     this.currBeat = 0;
-    this.noteMapPanel = new NoteMapPanel(this.noteRange, this.printMap);
 
-    this.add(noteMapPanel, BorderLayout.CENTER);
-    this.add(new NoteListPanel(this.noteRange), BorderLayout.WEST);
+    this.noteMapPanel = new NoteMapPanel(model);
+    JScrollPane scrollPane = new JScrollPane(this.noteMapPanel);
+    scrollPane.setPreferredSize(new Dimension(500, 400));
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    scrollPane.setAutoscrolls(true);
+
+    this.noteListPanel = new NoteListPanel(model);
+    JScrollPane notesScrollPane = new JScrollPane(this.noteListPanel);
+    notesScrollPane.setPreferredSize(new Dimension(50, 400));
+    notesScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    notesScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    notesScrollPane.setAutoscrolls(true);
+
+    this.add(scrollPane, BorderLayout.CENTER);
+    this.add(notesScrollPane, BorderLayout.WEST);
   }
 
-  public void sendUpdate(Integer beat) {
+  /**
+   * Refreshes this panel to the given beat.
+   * @param beat desired beat to view.
+   */
+  public void refresh(Integer beat) {
     this.currBeat = beat;
-    this.noteMapPanel.setBeat(beat);
+    this.noteMapPanel.refresh(this.currBeat);
   }
-
-
-
-
-
 
 }

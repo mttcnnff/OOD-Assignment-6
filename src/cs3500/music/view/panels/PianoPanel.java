@@ -1,7 +1,6 @@
 package cs3500.music.view.panels;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
@@ -9,18 +8,19 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.music.model.IPlayerModel;
-import cs3500.music.note.INote;
 import cs3500.music.util.Utils;
 
 public class PianoPanel extends JPanel {
 
-  Map<Integer, Rectangle> whiteKeys;
-  Map<Integer, Rectangle> blackKeys;
-  List<INote> currentNotes;
+  private Map<Integer, Rectangle> whiteKeys;
+  private Map<Integer, Rectangle> blackKeys;
+  private IPlayerModel model;
+  Integer currBeat;
 
-  public PianoPanel(List<INote> currentNotes) {
+  public PianoPanel(IPlayerModel model) {
     this.setBackground(Color.lightGray);
-    this.currentNotes = currentNotes;
+    this.model = model;
+    this.currBeat = 0;
 
     //white key sequence
     whiteKeys = new TreeMap<>();
@@ -52,8 +52,8 @@ public class PianoPanel extends JPanel {
     }
   }
 
-  public void sendUpdate(List<INote> currentNotes) {
-    this.currentNotes = currentNotes;
+  public void refresh(Integer currBeat) {
+    this.currBeat = currBeat;
   }
 
   @Override
@@ -61,14 +61,14 @@ public class PianoPanel extends JPanel {
     super.paintComponent(g);
     BasicStroke stroke = new BasicStroke(1);
     Graphics2D g2d = (Graphics2D) g;
-
     g2d.setStroke(stroke);
 
+    List<Integer> currentTones = Utils.notesToIntegers(this.model.getPlayingNotes(currBeat));
 
     for (Integer key : whiteKeys.keySet()) {
       Rectangle rect = whiteKeys.get(key);
       g2d.setColor(Color.white);
-      if (currentNotes.contains(Utils.integerToNote(key))) {
+      if (currentTones.contains(key)) {
         g2d.setColor(Color.yellow);
       }
       g2d.fill(rect);
@@ -80,7 +80,12 @@ public class PianoPanel extends JPanel {
 
     for (Integer key : blackKeys.keySet()) {
       Rectangle rect = blackKeys.get(key);
+      g2d.setColor(Color.black);
+      if (currentTones.contains(key)) {
+        g2d.setColor(Color.yellow);
+      }
       g2d.fill(rect);
+      g2d.setColor(Color.black);
       g2d.draw(rect);
 
     }

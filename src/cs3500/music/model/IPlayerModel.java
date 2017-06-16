@@ -4,16 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import cs3500.music.note.INote;
+import cs3500.music.notes.INote;
 import cs3500.music.song.ISong;
 
+/**
+ * Interface for the functionality that a PlayerModel must have.
+ */
 public interface IPlayerModel {
-  /**
-   * Prints song contained in this model as a string according to the specs found in Assignment 5
-   *
-   * @return String representation of the song this model contains.
-   */
-  String print();
 
   /**
    * Adds specified note at specified beat.
@@ -65,21 +62,47 @@ public interface IPlayerModel {
    */
   void concat(ISong song);
 
+  /**
+   * Returns a copy of the entire song in the form of a map.
+   * This only returns the "start notes" of a beat.
+   * @return map of beats -> corresponding notes played at that beat.
+   */
   Map<Integer, List<INote>> getSong();
 
-  Map<INote, Integer> getToneCount();
+  /**
+   * Gets the current full range of tones in this piece of music.
+   * This goes from the lowest notes to the highest with every note on the scale in between.
+   * @return map of midi tone code -> index it is in the tone range.
+   */
+  TreeMap<Integer, Integer> getToneRange();
 
-  TreeMap<INote, Integer> getToneRange();
+  /**
+   * Gets a list of notes that are played (i.e. only starting notes) at the given beat.
+   * @param beat desired beat to get start notes from.
+   * @return list of notes that are played (i.e. only starting notes) at the given beat.
+   */
+  List<INote> getStartNotes(Integer beat);
 
-  int[][] getPrintMap();
+  /**
+   * Gets a list of notes currently playing at a particular beat (i.e. not only start notes).
+   * @param beat desired beat to get the playing notes from.
+   * @return list of notes currently playing at a particular beat (i.e. not only start notes).
+   */
+  List<INote> getPlayingNotes(Integer beat);
 
-  List<INote> getBeatState(Integer beat);
-
-  List<INote> getBeat(Integer beat);
-
+  /**
+   * @return Integer value of the current length of the song (in beats).
+   */
   Integer getLength();
 
+  /**
+   * @return Integer value of the current tempo of the song (in microseconds per beat).
+   */
   Integer getTempo();
 
+  /**
+   * Reads in song from specified filename and builds it in this model.
+   * @param filename name of file to read in from root directory.
+   */
   void readInSong(String filename);
 }

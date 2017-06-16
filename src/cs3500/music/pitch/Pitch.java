@@ -19,22 +19,20 @@ public enum Pitch implements IPitch {
 
   private Integer rank;
 
+  /**
+   * Constructor for pitch.
+   * @param rank desired rank (0-11).
+   */
   Pitch(Integer rank) {
     this.rank = rank;
   }
 
+  @Override
   public Integer getRank() {
     return this.rank;
   }
 
-  public Pitch getNextHighest() {
-    return values()[(this.rank + 1) % 12];
-  }
-
-
-  /**
-   * @return string representation of this pitch.
-   */
+  @Override
   public String toString() {
     switch (this) {
       case C:
