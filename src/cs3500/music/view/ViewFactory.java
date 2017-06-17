@@ -3,6 +3,7 @@ package cs3500.music.view;
 import java.util.Objects;
 
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.view.visualview.VisualView;
 
 /**
  * Factory class for creating views at runtime.

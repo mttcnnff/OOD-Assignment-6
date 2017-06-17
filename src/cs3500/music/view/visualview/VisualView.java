@@ -1,16 +1,15 @@
-package cs3500.music.view;
+package cs3500.music.view.visualview;
 
 import java.awt.*;
 
 import javax.swing.*;
 import cs3500.music.model.IPlayerModel;
-import cs3500.music.view.panels.MusicPanel;
-import cs3500.music.view.panels.PianoPanel;
+import cs3500.music.view.IView;
 
 public class VisualView extends JFrame implements IView {
 
   private PianoPanel pianoPanel;
-  private MusicPanel musicPanel;
+  private NoteMapPanel noteMapPanel;
 
   /**
    * Constructor for visual view.
@@ -26,8 +25,14 @@ public class VisualView extends JFrame implements IView {
     this.setLayout(new BorderLayout());
 
     //music panel
-    this.musicPanel = new MusicPanel(model);
-    this.add(musicPanel, BorderLayout.NORTH);
+    this.noteMapPanel = new NoteMapPanel(model);
+    JScrollPane scrollPane = new JScrollPane(this.noteMapPanel);
+    scrollPane.setPreferredSize(new Dimension(500, 400));
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    scrollPane.setAutoscrolls(true);
+
+    this.add(scrollPane, BorderLayout.NORTH);
 
     //piano panel
     this.pianoPanel = new PianoPanel(model);
@@ -52,7 +57,7 @@ public class VisualView extends JFrame implements IView {
    */
   @Override
   public void refresh(Integer beat) {
-    this.musicPanel.refresh(beat);
+    this.noteMapPanel.refresh(beat);
     this.pianoPanel.refresh(beat);
     this.repaint();
   }

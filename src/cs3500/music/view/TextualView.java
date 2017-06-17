@@ -11,7 +11,7 @@ import cs3500.music.util.Utils;
 /**
  * Class to represent textual view.
  */
-public class TextualView extends JFrame implements IView {
+public class TextualView implements IView {
 
   private IPlayerModel model;
 

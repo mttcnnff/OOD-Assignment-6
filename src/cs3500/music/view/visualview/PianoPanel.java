@@ -1,4 +1,4 @@
-package cs3500.music.view.panels;
+package cs3500.music.view.visualview;
 
 import java.awt.*;
 import java.util.Map;

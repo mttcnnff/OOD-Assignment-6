@@ -1,5 +1,6 @@
 package cs3500.music.view;
 
+import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 import javax.swing.*;
 
+import cs3500.music.mocks.MockMidiDevice;
 import cs3500.music.model.IPlayerModel;
 import cs3500.music.notes.INote;
 import cs3500.music.util.Utils;
@@ -18,7 +20,7 @@ import cs3500.music.util.Utils;
 /**
  * Class representation of an audible view. Plays song from midi.
  */
-public class AudibleView extends JFrame implements IView {
+public class AudibleView implements IView {
 
   private IPlayerModel model;
   private Receiver receiver;
@@ -34,6 +36,18 @@ public class AudibleView extends JFrame implements IView {
     this.song = this.model.getSong();
     try {
       Synthesizer synthesizer = MidiSystem.getSynthesizer();
+      this.receiver = synthesizer.getReceiver();
+      synthesizer.open();
+    } catch (MidiUnavailableException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  public AudibleView(IPlayerModel model, MockMidiDevice synthesizer) {
+    this.model = model;
+    this.song = this.model.getSong();
+    try {
       this.receiver = synthesizer.getReceiver();
       synthesizer.open();
     } catch (MidiUnavailableException e) {

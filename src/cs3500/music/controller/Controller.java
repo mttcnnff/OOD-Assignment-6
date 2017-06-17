@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cs3500.music.model.IPlayerModel;
 import cs3500.music.view.IView;
+import cs3500.music.view.visualview.VisualView;
 
 /**
  * Basic controller class used for moving current beat up and down only.
@@ -71,7 +72,10 @@ public class Controller {
 		kbd.setKeyPressedMap(keyPresses);
 		kbd.setKeyReleasedMap(keyReleases);
 
-		view.addKeyListener(kbd);
+		if (view instanceof VisualView) {
+			((VisualView)view).addKeyListener(kbd);
+		}
+
 
 	}
 
