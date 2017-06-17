@@ -63,6 +63,7 @@ public class Utils {
 
   /**
    * Validates tone given.
+   *
    * @param tone given tone.
    * @throws IllegalArgumentException If invalid midi tone is passed throws an exception.
    */

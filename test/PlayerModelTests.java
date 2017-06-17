@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import cs3500.music.model.PlayerModelReadOnly;
 import cs3500.music.notes.INote;
 import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.PlayerModel;
@@ -19,7 +20,7 @@ public class PlayerModelTests {
   @Test
   public void TestAdd() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote b4 = new Note.Builder().pitch(Pitch.B).octave(0).duration(3).build();
@@ -43,7 +44,7 @@ public class PlayerModelTests {
   @Test(expected = IllegalArgumentException.class)
   public void TestAdd1() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     model.addNote(0, a4);
     model.addNote(0, a4);
@@ -53,7 +54,7 @@ public class PlayerModelTests {
   @Test(expected = IllegalArgumentException.class)
   public void TestAdd3() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).build();
     model.addNote(0, a4);
@@ -65,7 +66,7 @@ public class PlayerModelTests {
   @Test
   public void TestAdd4() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
@@ -77,7 +78,7 @@ public class PlayerModelTests {
   @Test
   public void TestRemove1() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     model.addNote(0, a4);
     model.removeNote(0, a4);
@@ -88,7 +89,7 @@ public class PlayerModelTests {
   @Test
   public void TestRemove3() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote b4 = new Note.Builder().pitch(Pitch.B).octave(0).duration(3).build();
@@ -110,7 +111,7 @@ public class PlayerModelTests {
   @Test(expected = IllegalArgumentException.class)
   public void TestRemove4() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
@@ -121,7 +122,7 @@ public class PlayerModelTests {
   @Test(expected = IllegalArgumentException.class)
   public void TestRemove5() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote b4 = new Note.Builder().pitch(Pitch.B).octave(0).duration(3).build();
     model.addNote(0, a4);
@@ -132,7 +133,7 @@ public class PlayerModelTests {
   @Test(expected = IllegalArgumentException.class)
   public void TestRemove6() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote b4 = new Note.Builder().pitch(Pitch.B).octave(0).duration(3).build();
     model.removeNote(0, b4);
   }
@@ -141,7 +142,7 @@ public class PlayerModelTests {
   @Test
   public void TestRemove7() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
@@ -157,7 +158,7 @@ public class PlayerModelTests {
   @Test
   public void TestEditDuration1() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(6).build();
     model.addNote(0, a4);
     model.editNoteDuration(0, a4, 2);
@@ -171,7 +172,7 @@ public class PlayerModelTests {
   @Test(expected = IllegalArgumentException.class)
   public void TestEditDuration3() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(6).build();
     model.addNote(0, a4);
     model.editNoteDuration(0, a4, -1);
@@ -185,7 +186,7 @@ public class PlayerModelTests {
   @Test
   public void TestEditDuration4() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(6).build();
     INote a41 = new Note.Builder().pitch(Pitch.A).octave(0).duration(3).instrument(1).build();
     model.addNote(0, a4);
@@ -202,7 +203,7 @@ public class PlayerModelTests {
   @Test
   public void TestConcat() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = new Song(4);
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(6).build();
     model.addNote(0, a4);
@@ -228,7 +229,7 @@ public class PlayerModelTests {
   @Test
   public void TestConcat1() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = new Song(4);
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
@@ -265,7 +266,7 @@ public class PlayerModelTests {
   @Test(expected = NullPointerException.class)
   public void TestConcat3() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = null;
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     model.addNote(0, c4);
@@ -284,7 +285,7 @@ public class PlayerModelTests {
   @Test
   public void TestCombine() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = new Song(4);
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
@@ -315,7 +316,7 @@ public class PlayerModelTests {
   @Test
   public void TestCombine1() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = new Song(4);
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote d4 = new Note.Builder().pitch(Pitch.D).octave(0).duration(6).build();
@@ -336,7 +337,7 @@ public class PlayerModelTests {
   @Test
   public void TestCombine3() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = new Song(4);
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote c41 = new Note.Builder().pitch(Pitch.C).octave(0).duration(6).build();
@@ -357,7 +358,7 @@ public class PlayerModelTests {
   @Test
   public void TestCombine4() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = new Song(4);
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote c41 = new Note.Builder().pitch(Pitch.C).octave(0).duration(6).instrument(1).build();
@@ -378,7 +379,7 @@ public class PlayerModelTests {
   @Test(expected = NullPointerException.class)
   public void TestCombine5() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     ISong song = null;
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     model.addNote(0, c4);
@@ -398,7 +399,7 @@ public class PlayerModelTests {
   @Test
   public void TestPrint1() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(15).build();
     model.addNote(0, c4);
     String expected = "    C0 \n" +

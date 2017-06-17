@@ -17,6 +17,7 @@ public interface INote {
 
   /**
    * Edits durations of this note to the specified one.
+   *
    * @param newDur desired new duration.
    */
   void editDuration(Integer newDur);

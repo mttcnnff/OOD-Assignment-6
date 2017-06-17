@@ -6,6 +6,7 @@ import java.util.TreeMap;
 import javax.swing.*;
 
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.util.Utils;
 
 /**
@@ -13,13 +14,14 @@ import cs3500.music.util.Utils;
  */
 public class TextualView implements IView {
 
-  private IPlayerModel model;
+  private IPlayerModelReadOnly model;
 
   /**
    * Constructor for textual view.
+   *
    * @param model given model this view will represent.
    */
-  public TextualView(IPlayerModel model) {
+  public TextualView(IPlayerModelReadOnly model) {
     this.model = model;
   }
 
@@ -33,6 +35,7 @@ public class TextualView implements IView {
 
   /**
    * Displays this song in the console.
+   *
    * @param beat given beat (not used for this view).
    */
   @Override
@@ -41,8 +44,7 @@ public class TextualView implements IView {
   }
 
   /**
-   * @return song contained in this model to console according to the specs found in
-   * Assignment 5.
+   * @return song contained in this model to console according to the specs found in Assignment 5.
    */
   public String getText() {
     StringBuilder result = new StringBuilder();
@@ -63,7 +65,7 @@ public class TextualView implements IView {
     }
     result.append("\n");
 
-    for(Integer i = 0; i < songLength; i++) {
+    for (Integer i = 0; i < songLength; i++) {
       result.append(padNumber(i.toString(), firstColPad));
       List<Integer> beatStartTones = Utils.notesToIntegers(this.model.getStartNotes(i));
       List<Integer> beatPlayingNotes = Utils.notesToIntegers(this.model.getPlayingNotes(i));
@@ -87,7 +89,8 @@ public class TextualView implements IView {
 
   /**
    * Pads given number for printing.
-   * @param num given number to pad.
+   *
+   * @param num     given number to pad.
    * @param padding padding to apply.
    * @return number with specified padding.
    */
@@ -97,6 +100,7 @@ public class TextualView implements IView {
 
   /**
    * Pads given note name with 4 spaces for heading row in textual view.
+   *
    * @param note given note name in String form to pad.
    * @return note name with proper padding.
    */
@@ -107,6 +111,7 @@ public class TextualView implements IView {
   /**
    * Pads given note representation for textual view ("|", "X", or " ") so it has 5 spaces for
    * printing.
+   *
    * @param tone character to pad.
    * @return tone padded with 5 spaces.
    */

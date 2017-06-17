@@ -36,6 +36,7 @@ public class Song implements ISong {
 
   /**
    * Constructor for new song.
+   *
    * @param tempo given tempo of new song.
    * @throws IllegalArgumentException if tempo is < 0.
    */
@@ -52,6 +53,7 @@ public class Song implements ISong {
 
   /**
    * Builder constructor for this class.
+   *
    * @param b Builder used to construct this song.
    * @throws IllegalArgumentException if builder is null.
    */
@@ -152,11 +154,12 @@ public class Song implements ISong {
 
   /**
    * Helper for adding notes to allow builder to use the same logic to addNotes.
-   * @param beat desired beat to add note at.
-   * @param note note to add.
+   *
+   * @param beat       desired beat to add note at.
+   * @param note       note to add.
    * @param startNotes map of start notes to edit.
-   * @param allNotes map of all notes to edit.
-   * @param toneCount tone count map to edit.
+   * @param allNotes   map of all notes to edit.
+   * @param toneCount  tone count map to edit.
    * @return true if add was successfully executed, false if not.
    */
   private static Boolean addNoteHelper(Integer beat, INote note, TreeMap<Integer, List<INote>>
@@ -317,8 +320,8 @@ public class Song implements ISong {
       Integer octave = Utils.integerToOctave(pitch);
       Pitch tone = Utils.integerToPitch(pitch);
       Integer duration = end - start;
-      addNoteHelper(start, new Note.Builder().pitch(tone).octave(octave).instrument(instrument-1)
-              .duration(duration).volume(volume).build(), this.builderStartNotes,
+      addNoteHelper(start, new Note.Builder().pitch(tone).octave(octave).instrument(instrument - 1)
+                      .duration(duration).volume(volume).build(), this.builderStartNotes,
               this.builderAllNotes,
               this.builderToneCount);
       return this;

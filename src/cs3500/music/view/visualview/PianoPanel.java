@@ -8,16 +8,17 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.util.Utils;
 
 public class PianoPanel extends JPanel {
 
   private Map<Integer, Rectangle> whiteKeys;
   private Map<Integer, Rectangle> blackKeys;
-  private IPlayerModel model;
+  private IPlayerModelReadOnly model;
   Integer currBeat;
 
-  public PianoPanel(IPlayerModel model) {
+  public PianoPanel(IPlayerModelReadOnly model) {
     this.setBackground(Color.lightGray);
     this.model = model;
     this.currBeat = 0;
@@ -29,7 +30,7 @@ public class PianoPanel extends JPanel {
     Integer i = 21;
     Integer whiteKeyOffset = 0;
     while (i < 110) {
-      whiteKeys.put(i, new Rectangle(whiteKeyOffset*20, 0, 20, 200));
+      whiteKeys.put(i, new Rectangle(whiteKeyOffset * 20, 0, 20, 200));
       pIndex = (pIndex + 1) % 7;
       i = i + pattern[pIndex];
       whiteKeyOffset++;
@@ -45,7 +46,7 @@ public class PianoPanel extends JPanel {
     Integer previousKeyEndX = 25;
     while (j < 107) {
       Integer newKeyBeginX = previousKeyEndX + blackKeyOffsets[bPIndex];
-      blackKeys.put(j, new Rectangle(newKeyBeginX,0,10,100));
+      blackKeys.put(j, new Rectangle(newKeyBeginX, 0, 10, 100));
       previousKeyEndX = newKeyBeginX + 10;
       bPIndex = (bPIndex + 1) % 5;
       j = j + bPattern[bPIndex];

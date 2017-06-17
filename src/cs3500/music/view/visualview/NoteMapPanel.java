@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.util.Utils;
 
 /**
@@ -16,26 +17,28 @@ import cs3500.music.util.Utils;
  */
 public class NoteMapPanel extends JPanel {
 
-  private IPlayerModel model;
+  private IPlayerModelReadOnly model;
   private Integer currBeat;
   private BasicStroke lineStroke;
 
   /**
    * Constructor for Note Map Panel
+   *
    * @param model given model to represent.
    */
-  NoteMapPanel(IPlayerModel model) {
+  NoteMapPanel(IPlayerModelReadOnly model) {
     this.setBackground(Color.white);
     this.model = model;
     this.currBeat = 0;
     this.lineStroke = new BasicStroke(3);
-    this.setPreferredSize(new Dimension(this.model.getLength()*25, 30 + this.model.getToneRange
-            ().size()*30));
+    this.setPreferredSize(new Dimension(this.model.getLength() * 25, 30 + this.model.getToneRange
+            ().size() * 30));
   }
 
   /**
    * Refresh note map panel to current beat.
    * (Move red line to current beat).
+   *
    * @param currBeat current beat view is at.
    */
   void refresh(Integer currBeat) {
@@ -44,6 +47,7 @@ public class NoteMapPanel extends JPanel {
 
   /**
    * Paints this panel in the view.
+   *
    * @param g given graphics object.
    */
   @Override
@@ -52,7 +56,7 @@ public class NoteMapPanel extends JPanel {
     Graphics2D g2d = (Graphics2D) g;
     g2d.setFont(new Font("default", Font.BOLD, 16));
 
-    Integer b = (int)((this.getLocationOnScreen().getX()+40)/-25)-10;
+    Integer b = (int) ((this.getLocationOnScreen().getX() + 40) / -25) - 10;
 
     TreeMap<Integer, Integer> toneRange = this.model.getToneRange();
     Integer songLength = this.model.getLength();
@@ -66,20 +70,20 @@ public class NoteMapPanel extends JPanel {
       List<Integer> currentStartNotes = Utils.notesToIntegers(this.model.getStartNotes(i));
       g2d.setColor(Color.green);
       for (Integer tone : currentTones) {
-        g2d.fillRect(40 + (i*25), (toneRange.size()-toneRange.get(tone))*30 -5,25, 30);
+        g2d.fillRect(40 + (i * 25), (toneRange.size() - toneRange.get(tone)) * 30 - 5, 25, 30);
       }
       g2d.setColor(Color.black);
       for (Integer startNote : currentStartNotes) {
-        g2d.fillRect(40 + (i*25), (toneRange.size()-toneRange.get(startNote))*30 -5,25, 30);
+        g2d.fillRect(40 + (i * 25), (toneRange.size() - toneRange.get(startNote)) * 30 - 5, 25, 30);
       }
     }
 
     //print measures
     g2d.setColor(Color.black);
-    for(Integer i = (beginViewBeat / 4) * 4; i < endViewBeat; i+=4) {
-      g2d.drawString(i.toString(), 40 + ((i/4)*100),20);
+    for (Integer i = (beginViewBeat / 4) * 4; i < endViewBeat; i += 4) {
+      g2d.drawString(i.toString(), 40 + ((i / 4) * 100), 20);
       for (Integer j = 0; j < toneRange.size(); j++) {
-        g2d.drawRect(40 + ((i/4)*100), 25 + 30*j, 100, 30);
+        g2d.drawRect(40 + ((i / 4) * 100), 25 + 30 * j, 100, 30);
       }
     }
 
@@ -88,12 +92,12 @@ public class NoteMapPanel extends JPanel {
     for (Integer tone : toneRange.keySet()) {
       g2d.drawString(Utils.toneToString(tone), 0, 10 + (toneRange.size() - toneRange.get
               (tone))
-              *30);
+              * 30);
     }
 
     g2d.setColor(Color.red);
     g2d.setStroke(this.lineStroke);
 
-    g2d.drawLine(40 + (this.currBeat*25), 25, 40 + this.currBeat*25, 25 + toneRange.size()*30);
+    g2d.drawLine(40 + (this.currBeat * 25), 25, 40 + this.currBeat * 25, 25 + toneRange.size() * 30);
   }
 }

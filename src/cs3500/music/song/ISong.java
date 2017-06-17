@@ -64,6 +64,7 @@ public interface ISong {
   /**
    * Returns a copy of the entire song in the form of a map.
    * This only returns the "start notes" of a beat.
+   *
    * @return map of beats -> corresponding notes played at that beat.
    */
   Map<Integer, List<INote>> getSong();
@@ -71,12 +72,14 @@ public interface ISong {
   /**
    * Gets the current full range of tones in this piece of music.
    * This goes from the lowest notes to the highest with every note on the scale in between.
+   *
    * @return map of midi tone code -> index it is in the tone range.
    */
   TreeMap<Integer, Integer> getToneRange();
 
   /**
    * Gets a list of notes that are played (i.e. only starting notes) at the given beat.
+   *
    * @param beat desired beat to get start notes from.
    * @return list of notes that are played (i.e. only starting notes) at the given beat.
    */
@@ -84,6 +87,7 @@ public interface ISong {
 
   /**
    * Gets a list of notes currently playing at a particular beat (i.e. not only start notes).
+   *
    * @param beat desired beat to get the playing notes from.
    * @return list of notes currently playing at a particular beat (i.e. not only start notes).
    */

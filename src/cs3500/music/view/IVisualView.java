@@ -16,6 +16,7 @@ public interface IVisualView extends IView {
    *
    * Thus our Swing-based implementation of this interface will already have such a
    * method.
+   *
    * @param listener given listener.
    */
   void addKeyListener(KeyListener listener);

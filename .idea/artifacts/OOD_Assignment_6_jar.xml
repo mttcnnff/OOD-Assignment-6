@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="OOD-Assignment-6:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/OOD_Assignment_6_jar</output-path>
+    <root id="archive" name="OOD-Assignment-6.jar">
+      <element id="module-output" name="OOD-Assignment-6" />
+    </root>
+  </artifact>
+</component>

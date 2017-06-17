@@ -3,7 +3,9 @@ package cs3500.music.view.visualview;
 import java.awt.*;
 
 import javax.swing.*;
+
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.view.IView;
 
 public class VisualView extends JFrame implements IView {
@@ -13,9 +15,10 @@ public class VisualView extends JFrame implements IView {
 
   /**
    * Constructor for visual view.
+   *
    * @param model given model this view is going to represent.
    */
-  public VisualView(IPlayerModel model) {
+  public VisualView(IPlayerModelReadOnly model) {
 
     //main frame
     this.setTitle("Music Player");
@@ -27,7 +30,7 @@ public class VisualView extends JFrame implements IView {
     //music panel
     this.noteMapPanel = new NoteMapPanel(model);
     JScrollPane scrollPane = new JScrollPane(this.noteMapPanel);
-    scrollPane.setPreferredSize(new Dimension(500, 400));
+    scrollPane.setPreferredSize(new Dimension(500, 600));
     scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     scrollPane.setAutoscrolls(true);
@@ -53,6 +56,7 @@ public class VisualView extends JFrame implements IView {
 
   /**
    * Refreshes this visual view to specified beat.
+   *
    * @param beat desired beat to view song at.
    */
   @Override

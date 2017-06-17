@@ -26,6 +26,7 @@ public class PlayerModel implements IPlayerModel {
 
   /**
    * Constructor for song.
+   *
    * @param measure desired measure.
    */
   public PlayerModel(Integer measure) {
@@ -99,9 +100,9 @@ public class PlayerModel implements IPlayerModel {
 
   @Override
   public void readInSong(String filename) {
-    try (FileReader fileReader = new FileReader(filename)){
+    try (FileReader fileReader = new FileReader(filename)) {
       this.song = MusicReader.parseFile(fileReader, new Song.Builder());
-    } catch (IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }

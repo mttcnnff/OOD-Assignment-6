@@ -14,6 +14,7 @@ import javax.swing.*;
 
 import cs3500.music.mocks.MockMidiDevice;
 import cs3500.music.model.IPlayerModel;
+import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.notes.INote;
 import cs3500.music.util.Utils;
 
@@ -22,16 +23,17 @@ import cs3500.music.util.Utils;
  */
 public class AudibleView implements IView {
 
-  private IPlayerModel model;
+  private IPlayerModelReadOnly model;
   private Receiver receiver;
   private Map<Integer, List<INote>> song;
 
 
   /**
    * Constructor for audible view.
+   *
    * @param model model this view will use.
    */
-  public AudibleView(IPlayerModel model) {
+  public AudibleView(IPlayerModelReadOnly model) {
     this.model = model;
     this.song = this.model.getSong();
     try {
@@ -44,7 +46,7 @@ public class AudibleView implements IView {
 
   }
 
-  public AudibleView(IPlayerModel model, MockMidiDevice synthesizer) {
+  public AudibleView(IPlayerModelReadOnly model, MockMidiDevice synthesizer) {
     this.model = model;
     this.song = this.model.getSong();
     try {

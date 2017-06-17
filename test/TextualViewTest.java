@@ -1,7 +1,10 @@
 import org.junit.Test;
 
+import java.io.IOException;
+
 import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.PlayerModel;
+import cs3500.music.model.PlayerModelReadOnly;
 import cs3500.music.notes.INote;
 import cs3500.music.notes.Note;
 import cs3500.music.pitch.Pitch;
@@ -15,7 +18,7 @@ public class TextualViewTest {
   @Test
   public void TestTextualView() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(16).build();
     model.addNote(0, c4);
     String expected = "    C0 \n" +
@@ -42,7 +45,7 @@ public class TextualViewTest {
   @Test
   public void TestAddTextualView() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     INote c4 = new Note.Builder().pitch(Pitch.C).octave(0).duration(3).build();
     INote a4 = new Note.Builder().pitch(Pitch.A).octave(0).duration(2).build();
     INote b4 = new Note.Builder().pitch(Pitch.B).octave(0).duration(3).build();
@@ -66,7 +69,7 @@ public class TextualViewTest {
   @Test
   public void TestPrintEmptySong() {
     IPlayerModel model = new PlayerModel(4);
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     assertEquals("", consoleView.getText());
   }
 
@@ -75,7 +78,7 @@ public class TextualViewTest {
   public void testMary() {
     IPlayerModel model = new PlayerModel(4);
     model.readInSong("mary-little-lamb.txt");
-    TextualView consoleView = new TextualView(model);
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
     String expected = "    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4 \n" +
             " 0                 X                                            X                 \n" +
             " 1                 |                                            |                 \n" +
@@ -142,7 +145,20 @@ public class TextualViewTest {
             "62  |                                       |                                     \n" +
             "63  |                                       |                                     ";
     assertEquals(expected, consoleView.getText());
+  }
 
+  @Test
+  public void testMystery1Console() {
+    IPlayerModel model = new PlayerModel(4);
+    model.readInSong("mystery-1.txt");
+    TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
+    try {
+      MIDITests.writeToFile("console-transcript.txt", consoleView.getText());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    assertEquals(1347, (int) model.getLength());
   }
 
 }

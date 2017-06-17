@@ -21,6 +21,7 @@ public enum Pitch implements IPitch {
 
   /**
    * Constructor for pitch.
+   *
    * @param rank desired rank (0-11).
    */
   Pitch(Integer rank) {

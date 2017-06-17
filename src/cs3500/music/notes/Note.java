@@ -109,6 +109,7 @@ public class Note implements Comparable<INote>, INote {
 
     /**
      * Sets builders pitch.
+     *
      * @param pitch new pitch.
      * @return this builder instance.
      */
@@ -119,6 +120,7 @@ public class Note implements Comparable<INote>, INote {
 
     /**
      * Sets builder's octave.
+     *
      * @param octave new octave.
      * @return this builder instance.
      */
@@ -129,6 +131,7 @@ public class Note implements Comparable<INote>, INote {
 
     /**
      * Sets builder's instrument.
+     *
      * @param instrument new instrument.
      * @return this builder instance.
      */
@@ -139,6 +142,7 @@ public class Note implements Comparable<INote>, INote {
 
     /**
      * Sets builder's duration.
+     *
      * @param duration new duration.
      * @return this builder instance.
      */
@@ -149,6 +153,7 @@ public class Note implements Comparable<INote>, INote {
 
     /**
      * Sets builder's volume.
+     *
      * @param volume new volume.
      * @return this builder instance.
      */
@@ -159,6 +164,7 @@ public class Note implements Comparable<INote>, INote {
 
     /**
      * Build this note specified by this builder.
+     *
      * @return new Note.
      */
     public INote build() {

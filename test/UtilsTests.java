@@ -16,9 +16,9 @@ public class UtilsTests {
   @Test
   public void integerToOctaveTests() {
     //lowest octave
-    assertEquals(0, (int)Utils.integerToOctave(21));
+    assertEquals(0, (int) Utils.integerToOctave(21));
     //highest octave
-    assertEquals(8, (int)Utils.integerToOctave(108));
+    assertEquals(8, (int) Utils.integerToOctave(108));
   }
 
   //Tests integer to Pitch
@@ -33,15 +33,15 @@ public class UtilsTests {
   //Tests note to integer
   @Test
   public void noteToIntegerTests() {
-    assertEquals(72, (int)Utils.noteToInteger(new Note.Builder().pitch(Pitch.C).octave(5)
+    assertEquals(72, (int) Utils.noteToInteger(new Note.Builder().pitch(Pitch.C).octave(5)
             .build()));
 
     //lowest note
-    assertEquals(21, (int)Utils.noteToInteger(new Note.Builder().pitch(Pitch.A).octave(0)
+    assertEquals(21, (int) Utils.noteToInteger(new Note.Builder().pitch(Pitch.A).octave(0)
             .build()));
 
     //highest note
-    assertEquals(108, (int)Utils.noteToInteger(new Note.Builder().pitch(Pitch.C).octave(8)
+    assertEquals(108, (int) Utils.noteToInteger(new Note.Builder().pitch(Pitch.C).octave(8)
             .build()));
   }
 
