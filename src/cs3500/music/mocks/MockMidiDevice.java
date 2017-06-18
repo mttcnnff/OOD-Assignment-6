@@ -9,11 +9,17 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Transmitter;
 
-
+/**
+ * Class to represent MockMidiDevice. Allows for caching of MIDI messages sent to be used later.
+ * (Possibly for tests, or visualization later).
+ */
 public class MockMidiDevice implements MidiDevice {
 
-  MockMidiReceiver receiver;
+  private MockMidiReceiver receiver;
 
+  /**
+   * Constructor for MockMidiDevice.
+   */
   public MockMidiDevice() {
     this.receiver = new MockMidiReceiver();
   }
@@ -25,12 +31,12 @@ public class MockMidiDevice implements MidiDevice {
 
   @Override
   public void open() throws MidiUnavailableException {
-
+    System.out.println("MockMidiDevice opened.");
   }
 
   @Override
   public void close() {
-
+    System.out.println("MockMidiDevice closed.");
   }
 
   @Override
@@ -73,6 +79,9 @@ public class MockMidiDevice implements MidiDevice {
     return null;
   }
 
+  /**
+   * @return ArrayList of ShortMessages sent to this device's receiver.
+   */
   public ArrayList<ShortMessage> getLog() {
     return this.receiver.getLog();
   }

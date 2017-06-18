@@ -20,8 +20,12 @@ import cs3500.music.pitch.Pitch;
 import cs3500.music.view.AudibleView;
 import cs3500.music.view.IView;
 
+/**
+ * Tests MIDI View to make sure it is sending proper messages.
+ */
 public class MIDITests {
 
+  //Tests MIDI View is sending proper messages
   @Test
   public void MidiTest() {
     IPlayerModel model = new PlayerModel(4);
@@ -48,6 +52,7 @@ public class MIDITests {
     }
   }
 
+  //Produces midi-transcript file for submission
   @Test
   public void maryTestMIDI() {
     IPlayerModel model = new PlayerModel(4);
@@ -63,7 +68,7 @@ public class MIDITests {
       logString.append("Command:");
       logString.append(String.valueOf(msg.getCommand()));
       logString.append(" Instrument:");
-      logString.append(String.valueOf(msg.getChannel()));
+      logString.append(String.valueOf(msg.getChannel() + 1));
       logString.append(" MIDI Note:");
       logString.append(String.valueOf(msg.getData1()));
       logString.append(" Volume:");
@@ -80,28 +85,18 @@ public class MIDITests {
     assertEquals(64, (int) model.getLength());
   }
 
-
-  public static void writeToFile(String fileName, String textLine) throws IOException {
+  /**
+   * Function used to write to file by tests.
+   *
+   * @param fileName file to write to.
+   * @param textLine text to write to file.
+   * @throws IOException if IO Fails.
+   */
+  static void writeToFile(String fileName, String textLine) throws IOException {
     FileWriter write = new FileWriter(fileName, false);
     PrintWriter println = new PrintWriter(write);
-
     println.print(textLine);
     println.close();
-  }
-
-  /**
-   * Parses short message into string for comparison
-   *
-   * @param msg msg to parse.
-   * @return String representation of msg.
-   */
-  private String parseShortMessage(ShortMessage msg) {
-    Integer command = msg.getCommand();
-    Integer channel = msg.getChannel();
-    Integer note = msg.getData1();
-    Integer volume = msg.getData2();
-    return command.toString() + " " + channel.toString() + " " + note.toString() + " " +
-            volume.toString() + "\n";
   }
 
 }

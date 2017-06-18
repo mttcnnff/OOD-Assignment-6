@@ -6,10 +6,18 @@ import java.util.TreeMap;
 
 import cs3500.music.notes.INote;
 
+/**
+ * Class representation of a Read-Only PlayerModel. Used as adapter class.
+ */
 public class PlayerModelReadOnly implements IPlayerModelReadOnly {
 
   private IPlayerModel readOnlyModel;
 
+  /**
+   * Constructor for PlayerModelReadOnly.
+   *
+   * @param model model to be wrapped in read-only class.
+   */
   public PlayerModelReadOnly(IPlayerModel model) {
     this.readOnlyModel = model;
   }

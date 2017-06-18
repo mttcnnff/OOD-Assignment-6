@@ -2,7 +2,6 @@ package cs3500.music.view;
 
 import java.util.Objects;
 
-import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.view.visualview.VisualView;
 
@@ -21,7 +20,8 @@ public class ViewFactory {
    * @throws IllegalArgumentException if model is null or requested type is not one of the 3
    *                                  options.
    */
-  public static IView makeView(String type, IPlayerModelReadOnly model) throws IllegalArgumentException {
+  public static IView makeView(String type, IPlayerModelReadOnly model)
+          throws IllegalArgumentException {
     Objects.requireNonNull(model, "Model is null!");
     switch (type) {
       case "console":

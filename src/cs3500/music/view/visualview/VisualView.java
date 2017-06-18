@@ -1,10 +1,12 @@
 package cs3500.music.view.visualview;
 
-import java.awt.*;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
 
-import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.view.IView;
 

@@ -6,7 +6,10 @@ import java.util.TreeMap;
 
 import cs3500.music.notes.INote;
 
-
+/**
+ * Interface for functionality that a PlayerModelReadOnly has. Acts as an adapter so class
+ * containing an instance of IPlayerModelReadOnly cannot edit the model.
+ */
 public interface IPlayerModelReadOnly {
 
   /**

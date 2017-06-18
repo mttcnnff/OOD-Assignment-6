@@ -79,13 +79,19 @@ public class Note implements Comparable<INote>, INote {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
 
     Note note = (Note) o;
 
-    if (instrument != null ? !instrument.equals(note.instrument) : note.instrument != null)
+    if (instrument != null ? !instrument.equals(note.instrument) : note.instrument != null) {
       return false;
+    }
     return tone != null ? tone.equals(note.tone) : note.tone == null;
   }
 

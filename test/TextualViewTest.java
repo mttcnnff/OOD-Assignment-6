@@ -79,7 +79,8 @@ public class TextualViewTest {
     IPlayerModel model = new PlayerModel(4);
     model.readInSong("mary-little-lamb.txt");
     TextualView consoleView = new TextualView(new PlayerModelReadOnly(model));
-    String expected = "    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  D#4   E4   F4  F#4   G4 \n" +
+    String expected = "    E3   F3  F#3   G3  G#3   A3  A#3   B3   C4  C#4   D4  " +
+            "D#4   E4   F4  F#4   G4 \n" +
             " 0                 X                                            X                 \n" +
             " 1                 |                                            |                 \n" +
             " 2                 |                                  X                           \n" +
@@ -147,6 +148,7 @@ public class TextualViewTest {
     assertEquals(expected, consoleView.getText());
   }
 
+  //Produces console-transcript.txt file for submission
   @Test
   public void testMystery1Console() {
     IPlayerModel model = new PlayerModel(4);

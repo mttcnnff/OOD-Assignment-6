@@ -192,6 +192,9 @@ public class Song implements ISong {
     return true;
   }
 
+  /**
+   * Ensures any totally empty beats are accoutned for in allNotes.
+   */
   private void fillEmptyBeats() {
     for (int i = 0; i < this.startNotes.size(); i++) {
       this.allNotes.putIfAbsent(i, new ArrayList<>());
@@ -213,7 +216,6 @@ public class Song implements ISong {
 
       //remove note from allNotes from this beat through the duration
       for (int i = beat; i < beat + note.getDuration(); i++) {
-        //TODO:might be a mistake here
         if (this.allNotes.get(i) != null) {
           this.allNotes.get(i).remove(note);
           if (this.allNotes.get(i).isEmpty()) {

@@ -46,6 +46,9 @@ public class Controller {
     view.refresh(currentBeat);
   }
 
+  /**
+   * Private method to increment current beat down by one and refresh the view.
+   */
   private void moveLeft() {
     if (currentBeat > 0) {
       currentBeat--;
@@ -57,7 +60,6 @@ public class Controller {
    * Creates and sets a keyboard listener for the view
    * In effect it creates snippets of code as Runnable object, one for each time a key
    * is typed, pressed and released, only for those that the program needs.
-   *
    * Last we create our KeyboardListener object, set all its maps and then give it to
    * the view.
    */
@@ -77,8 +79,6 @@ public class Controller {
     if (view instanceof VisualView) {
       ((VisualView) view).addKeyListener(kbd);
     }
-
-
   }
 
 }

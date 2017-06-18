@@ -1,13 +1,17 @@
 package cs3500.music.view.visualview;
 
-import java.awt.*;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.List;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
-import javax.swing.*;
 
-import cs3500.music.model.IPlayerModel;
+import javax.swing.JPanel;
+
 import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.util.Utils;
 
@@ -18,7 +22,7 @@ public class PianoPanel extends JPanel {
   private IPlayerModelReadOnly model;
   Integer currBeat;
 
-  public PianoPanel(IPlayerModelReadOnly model) {
+  PianoPanel(IPlayerModelReadOnly model) {
     this.setBackground(Color.lightGray);
     this.model = model;
     this.currBeat = 0;
@@ -53,7 +57,7 @@ public class PianoPanel extends JPanel {
     }
   }
 
-  public void refresh(Integer currBeat) {
+  void refresh(Integer currBeat) {
     this.currBeat = currBeat;
   }
 

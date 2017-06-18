@@ -3,9 +3,6 @@ package cs3500.music.view;
 import java.util.List;
 import java.util.TreeMap;
 
-import javax.swing.*;
-
-import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.util.Utils;
 
@@ -84,8 +81,6 @@ public class TextualView implements IView {
     result.deleteCharAt(result.length() - 1);
     return result.toString();
   }
-
-  //PRIVATE METHODS:
 
   /**
    * Pads given number for printing.

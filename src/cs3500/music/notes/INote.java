@@ -23,8 +23,7 @@ public interface INote {
   void editDuration(Integer newDur);
 
   /**
-   * @return Integer representation of instrument this notes is being played on. (As specified by
-   * midi).
+   * @return Integer representation of instrument this notes is being played on.
    */
   Integer getInstrument();
 

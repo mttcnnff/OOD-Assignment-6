@@ -1,12 +1,16 @@
 package cs3500.music.view.visualview;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.TreeMap;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.util.List;
+import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-import cs3500.music.model.IPlayerModel;
 import cs3500.music.model.IPlayerModelReadOnly;
 import cs3500.music.util.Utils;
 
@@ -31,8 +35,8 @@ public class NoteMapPanel extends JPanel {
     this.model = model;
     this.currBeat = 0;
     this.lineStroke = new BasicStroke(3);
-    this.setPreferredSize(new Dimension(this.model.getLength() * 25, 30 + this.model.getToneRange
-            ().size() * 30));
+    this.setPreferredSize(new Dimension(this.model.getLength() * 25,
+            30 + this.model.getToneRange().size() * 30));
   }
 
   /**
@@ -90,14 +94,14 @@ public class NoteMapPanel extends JPanel {
     //draw note list
     g2d.setFont(new Font("default", Font.BOLD, 16));
     for (Integer tone : toneRange.keySet()) {
-      g2d.drawString(Utils.toneToString(tone), 0, 10 + (toneRange.size() - toneRange.get
-              (tone))
-              * 30);
+      g2d.drawString(Utils.toneToString(tone), 0,
+              10 + (toneRange.size() - toneRange.get(tone)) * 30);
     }
 
     g2d.setColor(Color.red);
     g2d.setStroke(this.lineStroke);
 
-    g2d.drawLine(40 + (this.currBeat * 25), 25, 40 + this.currBeat * 25, 25 + toneRange.size() * 30);
+    g2d.drawLine(40 + (this.currBeat * 25), 25, 40 + this.currBeat * 25,
+            25 + toneRange.size() * 30);
   }
 }

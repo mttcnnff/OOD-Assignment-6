@@ -11,9 +11,7 @@ public interface IPitch {
   String toString();
 
   /**
-   * @return Integer representation of this pitch's rank (How high or low it is on the musical
-   * scale).
+   * @return Integer representation of this pitch's rank.
    */
   Integer getRank();
-
 }
